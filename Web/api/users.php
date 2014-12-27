@@ -1,9 +1,9 @@
 <?php
 
-require 'DataWrapper.php';
+require 'DbWrapper.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
-$api = new DataWrapper();
+$api = new DbWrapper();
 
 $queryText = "";
 switch ($method)
