@@ -1,96 +1,76 @@
 <?php
 
-require 'DbWrapper.php';
+require '../../DB/DbWrapper.php';
+require 'Models/ApiException.php';
 
-$method = $_SERVER['REQUEST_METHOD'];
-$api = new DbWrapper();
+$result = null;
+$prettyPrint = false;
 
-$queryText = "";
-switch ($method)
+try
 {
-    case "GET":
-        $queryText = buildGetQuery();
-        break;
-    case "POST":
-        $queryText = buildPostQuery();
-        break;
-    case "PUT":
-        $queryText = buildPutQuery();
-        break;
-    case "DELETE":
-        $queryText = buildDeleteQuery();
-        break;
-    default:
-        die("What kind of method is this? " . $method);
-        break;
+    $method = $_SERVER['REQUEST_METHOD'];
+    try
+    {
+        // Do whatever work we need to do
+        $result = doWork($method);
+    }
+    catch (ApiException $e)
+    {
+        // Handle known API Exception
+        $result = $e;
+    }
+}
+catch (Exception $e)
+{
+    // Handle unknown system error
+    $apiEx = new ApiException($e->getMessage());
+    $apiEx->ErrorCode = 500;
+    $result = $apiEx;
 }
 
-// Pretty-print
-$prettyPrint = false;
+// Determine whether to pretty print
 if ($_GET["prettyprint"] && $_GET["prettyprint"] > 0 && $_GET["prettyprint"] < 500)
 {
-    $topLimit = (bool)($_GET["prettyprint"]);
+    $prettyPrint = (bool)($_GET["prettyprint"]);
 }
 
-// Issue the DB call and write it out
-echo $api->runQueryJson($queryText, $prettyPrint);
+// Print out the results
+if ($prettyPrint)
+{
+    echo json_encode($result);
+}
+else
+{
+    echo json_encode($result, JSON_PRETTY_PRINT);
+}
+
+
+
 
 
 
 /*
  *  HELPER FUNCTIONS
  */
-
-function buildGetQuery()
+function doWork($method)
 {
-    // Select users
-    $query = "SELECT * FROM Users";
-    
-    // UserID
-    if ($_GET["userid"])
+    $db = new DbWrapper();
+    switch ($method)
     {
-        $query .= " WHERE UserID = " . (int)($_GET["userid"]);
+        case "GET":
+            if (!$_GET["userID"] || $_GET["userID"] <= 0)
+            {
+                throw new ApiException(100, "No UserID specified");
+            }
+            $user = $db->getUserByID($_GET["userID"]);
+            if ($user == null)
+            {
+                throw new ApiException(101, "There is no user with ID " . $_GET["userID"]);
+            }
+            return $user;
+        default:
+            throw new ApiException(001, "Unrecognized HTTP method: " . $method);
     }
-    
-    // Limit
-    if ($_GET["limit"] && $_GET["limit"] > 0 && $_GET["limit"] < 500)
-    {
-        $query .= " LIMIT " . (int)($_GET["limit"]);
-    }
-    
-    $query .= ";";
-    
-    return $query;
-}
-
-function buildPostQuery()
-{
-    // Update user
-    $query = "SELECT * FROM Users";
-    
-    // TODO: Write this method!
-    
-    return $query;
-}
-
-function buildPutQuery()
-{
-    // Create user
-    $query = "SELECT * FROM Users";
-    
-    // TODO: Write this method!
-    
-    return $query;
-}
-
-function buildDeleteQuery()
-{
-    // Delete user
-    $query = "SELECT * FROM Users";
-    
-    // TODO: Write this method!
-    
-    return $query;
 }
 
 ?>
