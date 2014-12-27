@@ -51,8 +51,8 @@
     </nav>
 
     <div class="container" style="margin-top: 60px;">
-        <p>
-            Hi there, I am {{4+6}} years old!
+        <p ng-controller="HomeController as homeCtrl">
+            Hello, there are {{ homeCtrl.users.length }} users in the DB
         </p>
     </div>
   </body>
