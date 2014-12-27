@@ -13,7 +13,8 @@ CREATE TABLE Users (
     CreatedOn TIMESTAMP NOT NULL,
 	LastLoginDate TIMESTAMP NOT NULL,
 	UserType INT NOT NULL DEFAULT 0,
-	CurrentPoints INT NOT NULL DEFAULT 0
+	CurrentPoints INT NOT NULL DEFAULT 0,
+	ApiKey VARCHAR(36) NOT NULL
 );
 
 -- Create the category table
@@ -49,6 +50,6 @@ CREATE TABLE DailyKeyIndicatorReports (
 
 -- Create an external user
 INSERT INTO Users 
-(UserName, PasswordHash, Email, CreatedOn, LastLoginDate, UserType)
+(UserName, PasswordHash, Email, CreatedOn, LastLoginDate, UserType, ApiKey)
 VALUES 
-('admin', '', 'mylifegrade@gmail.com', NOW(), NOW(), 1);
+('admin', '', 'mylifegrade@gmail.com', NOW(), NOW(), 1, UUID());
