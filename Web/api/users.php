@@ -11,8 +11,18 @@ switch ($method)
     case "GET":
         $queryText = buildGetQuery();
         break;
+    case "POST":
+        $queryText = buildPostQuery();
+        break;
+    case "PUT":
+        $queryText = buildPutQuery();
+        break;
+    case "DELETE":
+        $queryText = buildDeleteQuery();
+        break;
     default:
-        return "Bad stuff";
+        die("What kind of method is this? " . $method);
+        break;
 }
 
 // Pretty-print
@@ -33,6 +43,7 @@ echo $api->runQueryJson($queryText, $prettyPrint);
 
 function buildGetQuery()
 {
+    // Select users
     $query = "SELECT * FROM Users";
     
     // UserID
@@ -48,6 +59,36 @@ function buildGetQuery()
     }
     
     $query .= ";";
+    
+    return $query;
+}
+
+function buildPostQuery()
+{
+    // Update user
+    $query = "SELECT * FROM Users";
+    
+    // TODO: Write this method!
+    
+    return $query;
+}
+
+function buildPutQuery()
+{
+    // Create user
+    $query = "SELECT * FROM Users";
+    
+    // TODO: Write this method!
+    
+    return $query;
+}
+
+function buildDeleteQuery()
+{
+    // Delete user
+    $query = "SELECT * FROM Users";
+    
+    // TODO: Write this method!
     
     return $query;
 }
