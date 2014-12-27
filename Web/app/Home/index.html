@@ -53,6 +53,8 @@
     <div class="container" style="margin-top: 60px;">
         <p ng-controller="HomeController as homeCtrl">
             Hello, there are {{ homeCtrl.users.length }} users in the DB
+            <br />
+            Name: {{ homeCtrl.users[0].UserName }}
         </p>
     </div>
   </body>
