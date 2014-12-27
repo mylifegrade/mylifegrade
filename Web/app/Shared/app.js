@@ -1,1 +1,3 @@
-var app = angular.module('myLifeGrade', []);
+(function() {
+    var app = angular.module('myLifeGrade', []); 
+})();
