@@ -8,7 +8,7 @@ abstract class ApiWrapper
     protected $db;
     protected $userContext;
     
-    abstract protected function doWork($method);
+    abstract protected function doWork($method, $requestBody);
     
     public function getResponseJson($requireApiKey = true)
     {
@@ -37,7 +37,7 @@ abstract class ApiWrapper
                 }
                 
                 // Do whatever work we need to do
-                $result = static::doWork($method);
+                $result = static::doWork($method, file_get_contents('php://input'));
             }
             catch (ApiException $e)
             {
