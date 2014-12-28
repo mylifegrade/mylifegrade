@@ -22,7 +22,7 @@ class DbWrapper
     public function getUserContextByID($userID)
     {
         $queryText = "SELECT * FROM User WHERE UserID = " . $userID . " LIMIT 1;";
-        $result = self::runQueryFetchArray($queryText);
+        $result = self::runQueryFetchAsRows($queryText);
         
         if (sizeof($result) == 0)
         {
@@ -37,7 +37,7 @@ class DbWrapper
     public function getUserContextByApiKey($apiKey)
     {
         $queryText = "SELECT * FROM User WHERE ApiKey = '" . $apiKey . "' LIMIT 1;";
-        $selectUserResult = self::runQueryFetchArray($queryText);
+        $selectUserResult = self::runQueryFetchAsRows($queryText);
         if (sizeof($selectUserResult) == 0)
         {
             // No user found
@@ -48,7 +48,7 @@ class DbWrapper
         $user = User::createFromDbObject(DbUser::parse($selectUserResult[0]));
         
         // Populate categories and key indicators
-        $selectCategoriesResult = self::runQueryFetchArray("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
+        $selectCategoriesResult = self::runQueryFetchAsRows("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
         if (sizeof($selectCategoriesResult) > 0)
         {
             // Populate the categories and store the category IDs
@@ -74,7 +74,7 @@ class DbWrapper
             $selectKeyIndicatorsQueryText .= ");";
             
             // Populate the key indicators
-            $selectKeyIndicatorsResult = self::runQueryFetchArray($selectKeyIndicatorsQueryText);
+            $selectKeyIndicatorsResult = self::runQueryFetchAsRows($selectKeyIndicatorsQueryText);
             foreach ($selectKeyIndicatorsResult as $selectKeyIndicatorResult)
             {
                 $keyIndicator = KeyIndicator::createFromDbObject(DBKeyIndicator::parse($selectKeyIndicatorResult));
@@ -95,7 +95,7 @@ class DbWrapper
      */
     public function runQueryJson($queryText, $prettyPrint = false)
     {
-        $rows = $this->runQueryFetchArray($queryText);
+        $rows = $this->runQueryFetchAsRows($queryText);
         if ($prettyPrint)
         {
             return json_encode($rows, JSON_PRETTY_PRINT);
@@ -106,7 +106,7 @@ class DbWrapper
         }
     }
     
-    public function runQueryFetchArray($queryText)
+    public function runQueryFetchAsRows($queryText)
     {
         // Run the query
         $result = self::runQuery($queryText);
@@ -122,7 +122,7 @@ class DbWrapper
         return $rows;
     }
     
-    public function runQueryFetchObject($queryText, $className)
+    public function runQueryFetchAsObject($queryText, $className)
     {
         // Run the query
         $result = self::runQuery($queryText);
