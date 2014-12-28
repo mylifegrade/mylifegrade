@@ -42,14 +42,14 @@ class DbWrapper
         $user = User::createFromDbObject($selectUserResult[0]);
         
         // Populate categories and key indicators
-        $selectCategoriesResult = self::runQueryFetchAsRows("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
+        $selectCategoriesResult = self::runQueryFetchAsObject("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
         if (sizeof($selectCategoriesResult) > 0)
         {
             // Populate the categories and store the category IDs
             $categoryIDs = array();
             foreach ($selectCategoriesResult as $selectCategoryResult)
             {
-                $category = Category::createFromDbObject(DbCategory::parse($selectCategoryResult));
+                $category = Category::createFromDbObject($selectCategoryResult);
                 array_push($categoryIDs, $category->CategoryID);
                 $user->addCategory($category);
             }
@@ -68,10 +68,10 @@ class DbWrapper
             $selectKeyIndicatorsQueryText .= ");";
             
             // Populate the key indicators
-            $selectKeyIndicatorsResult = self::runQueryFetchAsRows($selectKeyIndicatorsQueryText);
+            $selectKeyIndicatorsResult = self::runQueryFetchAsObject($selectKeyIndicatorsQueryText);
             foreach ($selectKeyIndicatorsResult as $selectKeyIndicatorResult)
             {
-                $keyIndicator = KeyIndicator::createFromDbObject(DBKeyIndicator::parse($selectKeyIndicatorResult));
+                $keyIndicator = KeyIndicator::createFromDbObject($selectKeyIndicatorResult);
                 $user->addKeyIndicator($keyIndicator);
             }
         }
