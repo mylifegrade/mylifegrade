@@ -19,7 +19,7 @@ class DbWrapper
     /*
      *  USER FUNCTIONS
      */
-    public function getUserByID($userID)
+    public function getUserContextByID($userID)
     {
         $queryText = "SELECT * FROM Users WHERE UserID = " . $userID . " LIMIT 1;";
         $result = self::runQuery($queryText);
@@ -34,7 +34,7 @@ class DbWrapper
         }
     }
     
-    public function getUserByApiKey($apiKey)
+    public function getUserContextByApiKey($apiKey)
     {
         $queryText = "SELECT * FROM Users WHERE ApiKey = '" . $apiKey . "' LIMIT 1;";
         $result = self::runQuery($queryText);

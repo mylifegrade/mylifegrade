@@ -29,7 +29,7 @@ abstract class ApiWrapper
                         throw new ApiException(403, "No API key provided");
                     }
                     
-                    $this->userContext = $this->db->getUserByApiKey($_GET["apiKey"]);
+                    $this->userContext = $this->db->getUserContextByApiKey($_GET["apiKey"]);
                     if ($this->userContext == null)
                     {
                         throw new ApiException(403, "Not authenticated");
