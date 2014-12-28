@@ -55,7 +55,7 @@ abstract class ApiWrapper
         
         // Determine whether to pretty print
         $prettyPrint = false;
-        if ($_GET["prettyprint"] && $_GET["prettyprint"] > 0 && $_GET["prettyprint"] < 500)
+        if (isset($_GET["prettyprint"]))
         {
             $prettyPrint = (bool)($_GET["prettyprint"]);
         }
@@ -63,11 +63,11 @@ abstract class ApiWrapper
         // Print out the results
         if ($prettyPrint)
         {
-            return json_encode($result);
+            return json_encode($result, JSON_PRETTY_PRINT);
         }
         else
         {
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return json_encode($result);
         }
     }
 }
