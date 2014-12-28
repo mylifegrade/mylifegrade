@@ -127,13 +127,13 @@ class DbWrapper
         $result = self::runQuery($queryText);
         
         // Get a collection of the rows to return
-        $rows = array();
-        while($row = $result->fetch_assoc()) {
-            $rows[] = $row;
+        $objects = array();
+        while($obj = $result->fetch_object()) {
+            $objects[] = $obj;
         }
         
-        // Return the row collection
-        return $rows;
+        // Return the object collection
+        return $objects;
     }
     
     private function runQuery($queryText)
