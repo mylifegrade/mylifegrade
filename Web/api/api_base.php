@@ -19,6 +19,8 @@ abstract class ApiWrapper
             $method = $_SERVER['REQUEST_METHOD'];
             try
             {
+                $this->db = new DbWrapper();
+                
                 // Authenticate
                 if ($requireApiKey)
                 {
@@ -27,7 +29,7 @@ abstract class ApiWrapper
                         throw new ApiException(403, "No API key provided");
                     }
                     
-                    $this->user = $this->db->getUserByApiKey();
+                    $this->user = $this->db->getUserByApiKey($_GET["apiKey"]);
                     if ($this->user == null)
                     {
                         throw new ApiException(403, "Not authenticated");
