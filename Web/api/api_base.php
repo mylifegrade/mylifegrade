@@ -70,11 +70,6 @@ abstract class ApiWrapper
             return json_encode($result, JSON_PRETTY_PRINT);
         }
     }
-    
-    private function getUser()
-    {
-        
-    }
 }
 
 ?>

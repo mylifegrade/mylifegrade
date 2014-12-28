@@ -35,7 +35,6 @@ class DbWrapper
     
     public function getUserByApiKey($apiKey)
     {
-        echo "Running";
         $queryText = "SELECT * FROM Users WHERE ApiKey = '" . $apiKey . "' LIMIT 1;";
         $result = self::runQuery($queryText);
         if (sizeof($result) == 0)
