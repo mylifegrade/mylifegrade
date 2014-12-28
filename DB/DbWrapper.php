@@ -1,6 +1,7 @@
 <?php
 
 require 'DbModels.php';
+require '../../Web/api/Models/User.php';
 
 class DbWrapper
 {
@@ -41,10 +42,9 @@ class DbWrapper
         {
             return null;
         }
-        else
-        {
-            return DbUser::parse($result[0]);
-        }
+        
+        $dbUser = DbUser::parse($result[0]);
+        return User::createFromDbObject($dbUser);
     }
     
     

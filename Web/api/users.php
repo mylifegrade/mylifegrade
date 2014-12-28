@@ -9,7 +9,7 @@ class UsersApiWrapper extends ApiWrapper
         switch ($method)
         {
             case "GET":
-                return $this->user;
+                return $this->userContext;
             default:
                 throw new ApiException(001, "Unrecognized HTTP method: " . $method);
         }

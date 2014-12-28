@@ -6,7 +6,7 @@ require 'Models/Exceptions/ApiException.php';
 abstract class ApiWrapper
 {
     protected $db;
-    protected $user;
+    protected $userContext;
     
     abstract protected function doWork($method);
     
@@ -29,8 +29,8 @@ abstract class ApiWrapper
                         throw new ApiException(403, "No API key provided");
                     }
                     
-                    $this->user = $this->db->getUserByApiKey($_GET["apiKey"]);
-                    if ($this->user == null)
+                    $this->userContext = $this->db->getUserByApiKey($_GET["apiKey"]);
+                    if ($this->userContext == null)
                     {
                         throw new ApiException(403, "Not authenticated");
                     }
