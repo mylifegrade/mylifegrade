@@ -31,7 +31,7 @@ class DbWrapper
     
     private function getUserContext($queryText)
     {
-        $selectUserResult = self::runQueryFetchAsRows($queryText);
+        $selectUserResult = self::runQueryFetchAsObject($queryText);
         if (sizeof($selectUserResult) == 0)
         {
             // No user found
@@ -39,7 +39,7 @@ class DbWrapper
         }
         
         // Create the business logic object
-        $user = User::createFromDbObject(DbUser::parse($selectUserResult[0]));
+        $user = User::createFromDbObject($selectUserResult[0]);
         
         // Populate categories and key indicators
         $selectCategoriesResult = self::runQueryFetchAsRows("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
@@ -114,14 +114,14 @@ class DbWrapper
         return $rows;
     }
     
-    public function runQueryFetchAsObject($queryText, $className)
+    public function runQueryFetchAsObject($queryText, $className = null)
     {
         // Run the query
         $result = self::runQuery($queryText);
         
         // Get a collection of the rows to return
         $objects = array();
-        while($obj = $result->fetch_object()) {
+        while($obj = self::fetch_next_object($result, $className)) {
             $objects[] = $obj;
         }
         
@@ -148,6 +148,15 @@ class DbWrapper
         
         // Return the result
         return $result;
+    }
+    
+    private function fetch_next_object($result, $className)
+    {
+        if ($className != null)
+        {
+            return $result->fetch_object($className);
+        }
+        return $result->fetch_object();
     }
 }
 
