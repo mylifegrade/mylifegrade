@@ -108,19 +108,8 @@ class DbWrapper
     
     public function runQueryFetchArray($queryText)
     {
-        // echo "<br />Running " . $queryText;
-        
-        // Create the MySQL connection
-        $dbConn = new mysqli(self::HOST_NAME, self::USER_NAME, self::PASSWORD, self::DB_NAME, self::PORT) or die(mysql_error());
-        if($dbConn->connect_errno > 0) {
-            die('Unable to connect to database [' . $dbConn->connect_error . ']');
-        }
-        
-        // Issue the query
-        $result = $dbConn->query($queryText);
-        if(!$result) {
-            die("There was an error running the query [' . $dbConn->error . ']. The query text was: " . $queryText);
-        }
+        // Run the query
+        $result = self::runQuery($queryText);
         
         // Get a collection of the rows to return
         $rows = array();
@@ -133,6 +122,21 @@ class DbWrapper
     }
     
     public function runQueryFetchObject($queryText, $className)
+    {
+        // Run the query
+        $result = self::runQuery($queryText);
+        
+        // Get a collection of the rows to return
+        $rows = array();
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        
+        // Return the row collection
+        return $rows;
+    }
+    
+    private function runQuery($queryText)
     {
         // echo "<br />Running " . $queryText;
         
@@ -148,14 +152,8 @@ class DbWrapper
             die("There was an error running the query [' . $dbConn->error . ']. The query text was: " . $queryText);
         }
         
-        // Get a collection of the rows to return
-        $rows = array();
-        while($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        
-        // Return the row collection
-        return $rows;
+        // Return the result
+        return $result;
     }
 }
 
