@@ -1,7 +1,7 @@
 <?php
 
 require '../../DB/DbWrapper.php';
-require 'Models/ApiException.php';
+require 'Models/Exceptions/ApiException.php';
 
 abstract class ApiWrapper
 {
