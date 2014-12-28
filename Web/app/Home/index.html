@@ -39,10 +39,23 @@
       </div>
     </nav>
 
-    <div class="container" style="margin-top: 60px;">
-        <p ng-controller="HomeController as homeCtrl">
-            {{ homeCtrl.users }}
-        </p>
+    <div class="container" ng-controller="HomeController as homeCtrl" style="margin-top: 60px;">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="well">
+            <h3>{{ homeCtrl.currentUser.UserName }}</h3>
+            <p>{{ homeCtrl.currentUser.Email }}</p>
+            <p ng-show="homeCtrl.currentUser.UserType == 1">
+              <strong>Admin</strong>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <pre>
+            {{ homeCtrl.currentUser }}
+          </pre>
+        </div>
+      </div>
     </div>
   </body>
 </html>
