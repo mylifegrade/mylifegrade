@@ -1,5 +1,14 @@
 <?php
 
+function parseObject($row, $obj)
+{
+    foreach (array_keys($row) as $columnName)
+    {
+        $obj->$columnName = $row[$columnName];
+    }
+    return $obj;
+}
+
 class DbUser
 {
     public $UserID;
@@ -8,19 +17,14 @@ class DbUser
     public $PasswordSalt;
     public $Email;
     public $CreatedOn;
-    public $LastLoginDate;
+    public $LastActivityDate;
     public $UserType;
     public $CurrentPoints;
     public $ApiKey;
     
     public static function parse($row)
     {
-        $dbUser = new DbUser();
-        foreach (array_keys($row) as $columnName)
-        {
-            $dbUser->$columnName = $row[$columnName];
-        }
-        return $dbUser;
+        return parseObject($row, new DbUser());
     }
 }
 

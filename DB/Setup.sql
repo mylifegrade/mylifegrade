@@ -11,7 +11,7 @@ CREATE TABLE Users (
 	PasswordSalt INT NOT NULL DEFAULT 0,
 	Email VARCHAR(200),
     CreatedOn TIMESTAMP NOT NULL,
-	LastLoginDate TIMESTAMP NOT NULL,
+	LastActivityDate TIMESTAMP NOT NULL,
 	UserType INT NOT NULL DEFAULT 0,
 	CurrentPoints INT NOT NULL DEFAULT 0,
 	ApiKey VARCHAR(36) NOT NULL
@@ -50,6 +50,6 @@ CREATE TABLE DailyKeyIndicatorReports (
 
 -- Create an external user
 INSERT INTO Users 
-(UserName, PasswordHash, Email, CreatedOn, LastLoginDate, UserType, ApiKey)
+(UserName, PasswordHash, Email, CreatedOn, LastActivityDate, UserType, ApiKey)
 VALUES 
 ('admin', '', 'mylifegrade@gmail.com', NOW(), NOW(), 1, UUID());
