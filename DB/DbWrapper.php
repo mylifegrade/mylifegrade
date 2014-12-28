@@ -22,14 +22,10 @@ class DbWrapper
     {
         $queryText = "SELECT * FROM Users WHERE UserID = " . $userID . " LIMIT 1;";
         $result = self::runQuery($queryText);
-        if ($result == null)
-        {
-            throw new Exception("The DB returned a null result");
-        }
         
         if (sizeof($result) == 0)
         {
-            echo "No user found";
+            return null;
         }
         else
         {
@@ -37,7 +33,19 @@ class DbWrapper
         }
     }
     
-    
+    public function getUserByApiKey($apiKey)
+    {
+        $queryText = "SELECT * FROM Users WHERE ApiKey = '" . $apiKey . "' LIMIT 1;";
+        $result = self::runQuery($queryText);
+        if (sizeof($result) == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return DbUser::parse($result[0]);
+        }
+    }
     
     
     

@@ -5,18 +5,37 @@ require 'Models/ApiException.php';
 
 abstract class ApiWrapper
 {
-    abstract protected function doWork($method, $db);
+    protected $db;
+    protected $user;
     
-    public function getResponseJson()
+    abstract protected function doWork($method);
+    
+    public function getResponseJson($requireApiKey = true)
     {
         $result = null;
         try
         {
+            // Process the request
             $method = $_SERVER['REQUEST_METHOD'];
             try
             {
+                // Authenticate
+                if ($requireApiKey)
+                {
+                    if (!isset($_GET["apiKey"]))
+                    {
+                        throw new ApiException(403, "No API key provided");
+                    }
+                    
+                    $this->user = $this->db->getUserByApiKey();
+                    if ($this->user == null)
+                    {
+                        throw new ApiException(403, "Not authenticated");
+                    }
+                }
+                
                 // Do whatever work we need to do
-                $result = static::doWork($method, new DbWrapper());
+                $result = static::doWork($method);
             }
             catch (ApiException $e)
             {
@@ -48,6 +67,11 @@ abstract class ApiWrapper
         {
             return json_encode($result, JSON_PRETTY_PRINT);
         }
+    }
+    
+    private function getUser()
+    {
+        
     }
 }
 
