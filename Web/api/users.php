@@ -1,6 +1,6 @@
 <?php
 
-require 'api.php';
+require 'api_base.php';
 
 class UsersApiWrapper extends ApiWrapper
 {
