@@ -7,7 +7,7 @@ abstract class ApiWrapper
 {
     abstract protected function doWork($method, $db);
     
-    public function getResponse()
+    public function getResponseJson()
     {
         $result = null;
         try

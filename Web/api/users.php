@@ -26,6 +26,6 @@ class UsersApiWrapper extends ApiWrapper
 }
 
 $userApi = new UsersApiWrapper();
-echo $userApi->getResponse();
+echo $userApi->getResponseJson();
 
 ?>
