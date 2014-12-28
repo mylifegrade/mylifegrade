@@ -140,7 +140,7 @@ class DbWrapper
     
     private function runQuery($queryText)
     {
-        // echo "<br />Running " . $queryText;
+        // echo "Running " . $queryText . "<br />";
         
         // Create the MySQL connection
         $dbConn = new mysqli(self::HOST_NAME, self::USER_NAME, self::PASSWORD, self::DB_NAME, self::PORT) or die(mysql_error());
