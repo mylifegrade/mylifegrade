@@ -31,7 +31,7 @@ class DbWrapper
     
     private function getUserContext($queryText)
     {
-        $selectUserResult = self::runQueryFetchAsObject($queryText);
+        $selectUserResult = self::runQueryFetchAsObjects($queryText);
         if (sizeof($selectUserResult) == 0)
         {
             // No user found
@@ -42,7 +42,7 @@ class DbWrapper
         $user = User::createFromDbObject($selectUserResult[0]);
         
         // Populate categories and key indicators
-        $selectCategoriesResult = self::runQueryFetchAsObject("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
+        $selectCategoriesResult = self::runQueryFetchAsObjects("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
         if (sizeof($selectCategoriesResult) > 0)
         {
             // Populate the categories and store the category IDs
@@ -68,7 +68,7 @@ class DbWrapper
             $selectKeyIndicatorsQueryText .= ");";
             
             // Populate the key indicators
-            $selectKeyIndicatorsResult = self::runQueryFetchAsObject($selectKeyIndicatorsQueryText);
+            $selectKeyIndicatorsResult = self::runQueryFetchAsObjects($selectKeyIndicatorsQueryText);
             foreach ($selectKeyIndicatorsResult as $selectKeyIndicatorResult)
             {
                 $keyIndicator = KeyIndicator::createFromDbObject($selectKeyIndicatorResult);
@@ -87,7 +87,7 @@ class DbWrapper
      */
     public function runQueryJson($queryText, $prettyPrint = false)
     {
-        $obj = $this->runQueryFetchAsObject($queryText);
+        $obj = $this->runQueryFetchAsObjects($queryText);
         if ($prettyPrint)
         {
             return json_encode($obj, JSON_PRETTY_PRINT);
@@ -114,7 +114,7 @@ class DbWrapper
         return $rows;
     }
     
-    public function runQueryFetchAsObject($queryText, $className = null)
+    public function runQueryFetchAsObjects($queryText, $className = null)
     {
         // Run the query
         $result = self::runQuery($queryText);
