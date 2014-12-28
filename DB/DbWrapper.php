@@ -87,14 +87,14 @@ class DbWrapper
      */
     public function runQueryJson($queryText, $prettyPrint = false)
     {
-        $rows = $this->runQueryFetchAsRows($queryText);
+        $obj = $this->runQueryFetchAsObject($queryText);
         if ($prettyPrint)
         {
-            return json_encode($rows, JSON_PRETTY_PRINT);
+            return json_encode($obj, JSON_PRETTY_PRINT);
         }
         else
         {
-            return json_encode($rows);
+            return json_encode($obj);
         }
     }
     
