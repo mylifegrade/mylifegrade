@@ -37,6 +37,11 @@ class DbCategory
     public $categoryWeight;
     public $createdOn;
     public $isActive;
+    
+    public static function parse($row)
+    {
+        return parseObject($row, new DbCategory());
+    }
 }
 
 class DbKeyIndicator
@@ -48,6 +53,11 @@ class DbKeyIndicator
     public $keyIndicatorWeight;
     public $createdOn;
     public $isActive;
+    
+    public static function parse($row)
+    {
+        return parseObject($row, new DbKeyIndicator());
+    }
 }
 
 class DbDailyKeyIndicatorReport
@@ -57,6 +67,11 @@ class DbDailyKeyIndicatorReport
     public $createdOn;
     public $achievedPercentage;
     public $notes;
+    
+    public static function parse($row)
+    {
+        return parseObject($row, new DbDailyKeyIndicatorReport());
+    }
 }
 
 ?>
