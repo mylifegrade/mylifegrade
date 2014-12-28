@@ -21,22 +21,16 @@ class DbWrapper
      */
     public function getUserContextByID($userID)
     {
-        $queryText = "SELECT * FROM User WHERE UserID = " . $userID . " LIMIT 1;";
-        $result = self::runQueryFetchAsRows($queryText);
-        
-        if (sizeof($result) == 0)
-        {
-            return null;
-        }
-        else
-        {
-            return DbUser::parse($result[0]);
-        }
+        return self::getUserContext("SELECT * FROM User WHERE UserID = " . $userID . " LIMIT 1;");
     }
     
     public function getUserContextByApiKey($apiKey)
     {
-        $queryText = "SELECT * FROM User WHERE ApiKey = '" . $apiKey . "' LIMIT 1;";
+        return self::getUserContext("SELECT * FROM User WHERE ApiKey = '" . $apiKey . "' LIMIT 1;");
+    }
+    
+    private function getUserContext($queryText)
+    {
         $selectUserResult = self::runQueryFetchAsRows($queryText);
         if (sizeof($selectUserResult) == 0)
         {
@@ -85,8 +79,6 @@ class DbWrapper
         // Return the complete user context
         return $user;
     }
-    
-    
     
     
     
