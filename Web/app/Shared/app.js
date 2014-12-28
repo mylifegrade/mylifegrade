@@ -3,7 +3,7 @@
     app.controller('HomeController', [ '$http', function($http) {
        var tmp = this;
        tmp.users = [];
-       $http.get('../../api/users.php?userID=1')
+       $http.get('../../api/current_user.php?apiKey=6ea70c49-8ed4-11e4-86fb-02d737fe62fd')
        .success(function(data) {
            tmp.users = data;
        })
