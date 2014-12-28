@@ -4,7 +4,7 @@ CREATE DATABASE myLifeGrade;
 USE myLifeGrade;
 
 -- Create the users table
-CREATE TABLE Users (
+CREATE TABLE User (
 	UserID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	UserName VARCHAR(200) NOT NULL,
 	PasswordHash VARCHAR(200),
@@ -18,7 +18,7 @@ CREATE TABLE Users (
 );
 
 -- Create the category table
-CREATE TABLE Categories (
+CREATE TABLE Category (
     CategoryID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     UserID INT NOT NULL, -- TODO: Make this an FK
     CategoryName VARCHAR(200),
@@ -29,7 +29,7 @@ CREATE TABLE Categories (
 );
 
 -- Create the key indicator table
-CREATE TABLE KeyIndicators (
+CREATE TABLE KeyIndicator (
     KeyIndicatorID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     CategoryID INT NOT NULL,  -- TODO: Make this an FK
     KeyIndicatorName VARCHAR(200),
@@ -40,7 +40,7 @@ CREATE TABLE KeyIndicators (
 );
 
 -- Create the daily report table
-CREATE TABLE DailyKeyIndicatorReports (
+CREATE TABLE DailyKeyIndicatorReport (
     ReportID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     KeyIndicatorID INT NOT NULL, -- TODO: Make this an FK
     CreatedOn TIMESTAMP NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE DailyKeyIndicatorReports (
 );
 
 -- Create an external user
-INSERT INTO Users 
+INSERT INTO User 
 (UserName, PasswordHash, Email, CreatedOn, LastActivityDate, UserType, ApiKey)
 VALUES 
 ('admin', '', 'mylifegrade@gmail.com', NOW(), NOW(), 1, UUID());

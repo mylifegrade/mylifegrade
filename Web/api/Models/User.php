@@ -51,6 +51,17 @@ class User
     {
         $this->Categories[$category->CategoryID] = $category;
     }
+    
+    function addKeyIndicator($keyIndicator)
+    {
+        if (!array_key_exists($keyIndicator->CategoryID))
+        {
+            throw new Exception("Category ID " . $keyIndicator->CategoryID . " has not been added yet");
+        }
+        
+        // Add the key indicator to its category
+        $this->Categories[$category->CategoryID]->KeyIndicators[$keyIndicator->KeyIndicatorID] = $keyIndicator;
+    }
 }
 
 ?>
