@@ -118,6 +118,7 @@ class DbWrapper
         }
         
         // Return the row collection
+        $result->close();
         return $rows;
     }
     
@@ -133,6 +134,7 @@ class DbWrapper
         }
         
         // Return the object collection
+        $result->close();
         return $objects;
     }
     
