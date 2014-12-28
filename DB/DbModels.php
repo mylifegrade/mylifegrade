@@ -30,13 +30,13 @@ class DbUser
 
 class DbCategory
 {
-    public $categoryID;
-    public $userID;
-    public $categoryName;
-    public $categoryDescription;
-    public $categoryWeight;
-    public $createdOn;
-    public $isActive;
+    public $CategoryID;
+    public $UserID;
+    public $CategoryName;
+    public $CategoryDescription;
+    public $CategoryWeight;
+    public $CreatedOn;
+    public $IsActive;
     
     public static function parse($row)
     {
@@ -46,13 +46,13 @@ class DbCategory
 
 class DbKeyIndicator
 {
-    public $keyIndicatorID;
-    public $categoryID;
-    public $keyIndicatorName;
-    public $keyIndicatorDescription;
-    public $keyIndicatorWeight;
-    public $createdOn;
-    public $isActive;
+    public $KeyIndicatorID;
+    public $CategoryID;
+    public $KeyIndicatorName;
+    public $KeyIndicatorDescription;
+    public $KeyIndicatorWeight;
+    public $CreatedOn;
+    public $IsActive;
     
     public static function parse($row)
     {
@@ -62,11 +62,11 @@ class DbKeyIndicator
 
 class DbDailyKeyIndicatorReport
 {
-    public $reportID;
-    public $keyIndicatorID;
-    public $createdOn;
-    public $achievedPercentage;
-    public $notes;
+    public $ReportID;
+    public $KeyIndicatorID;
+    public $CreatedOn;
+    public $AchievedPercentage;
+    public $Notes;
     
     public static function parse($row)
     {
