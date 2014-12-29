@@ -42,7 +42,7 @@ class DbWrapper
         $user = User::createFromDbObject($selectUserResult[0]);
         
         // Populate categories and key indicators
-        $selectCategoriesResult = self::runQuery("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";", true);
+        $selectCategoriesResult = self::runQueryWithParameters("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";", $parameters, true);
         if (sizeof($selectCategoriesResult) > 0)
         {
             // Populate the categories and store the category IDs
