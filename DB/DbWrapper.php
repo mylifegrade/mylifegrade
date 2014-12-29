@@ -21,17 +21,17 @@ class DbWrapper
      */
     public function getUserContextByID($userID)
     {
-        return self::getUserContext("SELECT * FROM User WHERE UserID = " . $userID . " LIMIT 1;");
+        return self::getUserContext("SELECT * FROM User WHERE UserID = " . $userID . " LIMIT 1;", null);
     }
     
     public function getUserContextByApiKey($apiKey)
     {
-        return self::getUserContext("SELECT * FROM User WHERE ApiKey = '" . $apiKey . "' LIMIT 1;");
+        return self::getUserContext("SELECT * FROM User WHERE ApiKey = '" . $apiKey . "' LIMIT 1;", null);
     }
     
-    private function getUserContext($statement)
+    private function getUserContext($queryText, $parameters)
     {
-        $selectUserResult = self::runQuery($statement, true);
+        $selectUserResult = self::runQueryWithParameters($queryText, $parameters, true);
         if (sizeof($selectUserResult) == 0)
         {
             // No user found
