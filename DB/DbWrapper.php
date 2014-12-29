@@ -31,7 +31,7 @@ class DbWrapper
     
     private function getUserContext($queryText)
     {
-        $selectUserResult = self::runQueryFetchAsObjects($queryText);
+        $selectUserResult = self::runQuery($queryText, true);
         if (sizeof($selectUserResult) == 0)
         {
             // No user found
@@ -42,7 +42,7 @@ class DbWrapper
         $user = User::createFromDbObject($selectUserResult[0]);
         
         // Populate categories and key indicators
-        $selectCategoriesResult = self::runQueryFetchAsObjects("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";");
+        $selectCategoriesResult = self::runQuery("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";", true);
         if (sizeof($selectCategoriesResult) > 0)
         {
             // Populate the categories and store the category IDs
@@ -68,7 +68,7 @@ class DbWrapper
             $selectKeyIndicatorsQueryText .= ");";
             
             // Populate the key indicators
-            $selectKeyIndicatorsResult = self::runQueryFetchAsObjects($selectKeyIndicatorsQueryText);
+            $selectKeyIndicatorsResult = self::runQuery($selectKeyIndicatorsQueryText, true);
             foreach ($selectKeyIndicatorsResult as $selectKeyIndicatorResult)
             {
                 $keyIndicator = KeyIndicator::createFromDbObject($selectKeyIndicatorResult);
@@ -87,7 +87,7 @@ class DbWrapper
      */
     public function runQueryJson($queryText, $prettyPrint = false)
     {
-        $obj = $this->runQueryFetchAsObjects($queryText);
+        $obj = $this->runQuery($queryText, true);
         if ($prettyPrint)
         {
             return json_encode($obj, JSON_PRETTY_PRINT);
@@ -98,64 +98,70 @@ class DbWrapper
         }
     }
     
-    public function runQueryFetchAsRows($queryText)
-    {
-        // Run the query
-        $result = self::runQuery($queryText);
-        
-        // Get a collection of the rows to return
-        $rows = array();
-        while($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        
-        // Return the row collection
-        $result->close();
-        return $rows;
-    }
-    
-    public function runQueryFetchAsObjects($queryText, $className = null)
-    {
-        // Run the query
-        $result = self::runQuery($queryText);
-        
-        // Get a collection of the rows to return
-        $objects = array();
-        while($obj = self::fetch_next_object($result, $className)) {
-            $objects[] = $obj;
-        }
-        
-        // Return the object collection
-        $result->close();
-        return $objects;
-    }
-    
-    private function runQuery($queryText)
+    private function runQuery($queryText, $fetchAsObjects = false, $className = null)
     {
         // echo "Running " . $queryText . "<br />";
         
         // Create the MySQL connection
-        $dbConn = new mysqli(self::HOST_NAME, self::USER_NAME, self::PASSWORD, self::DB_NAME, self::PORT) or die(mysql_error());
-        if($dbConn->connect_errno > 0) {
-            die('Unable to connect to database [' . $dbConn->connect_error . ']');
+        $dbConn = null;
+        try
+        {
+            $dbConn = new PDO("mysql:host=" . self::HOST_NAME . ";port=" . self::PORT . ";dbname=" . self::DB_NAME, self::USER_NAME, self::PASSWORD);
+            if ($dbConn == null)
+            {
+                throw new Exception("The connection was initialized to null");
+            }
+        }
+        catch (Exception $e)
+        {
+            die("Error while initializing the DB connection: " . $e->getMessage());
         }
         
         // Issue the query
-        $result = $dbConn->query($queryText);
-        if(!$result) {
-            die("There was an error running the query [' . $dbConn->error . ']. The query text was: " . $queryText);
+        $result = null;
+        try
+        {
+            $result = $dbConn->query($queryText);
+            if ($result == null)
+            {
+                throw new Exception("The query result was initialized to null");
+            }
+        }
+        catch (Exception $e)
+        {
+            die("Error while executing the DB query: " . $e->getMessage());
         }
         
-        // Return the result
-        return $result;
+        // Determin the fetch method
+        if ($fetchAsObjects)
+        {
+            if ($className != null)
+            {
+                $result->setFetchMode(PDO::FETCH_CLASS, $className);
+            }
+            else
+            {
+                $result->setFetchMode(PDO::FETCH_OBJ);
+            }
+        }
+        
+        // Build an array to return
+        $returnArray = array();
+        while ($returnValue = $result->fetch()) {
+            array_push($returnArray, $returnValue);
+        }
+        
+        return $returnArray;
     }
     
     private function fetch_next_object($result, $className)
     {
+        echo "In fetch next object";
         if ($className != null)
         {
             return $result->fetch_object($className);
         }
+        
         return $result->fetch_object();
     }
 }
