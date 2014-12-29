@@ -98,7 +98,7 @@ class DbWrapper
         }
     }
     
-    private function runQuery($queryText, $fetchAsObjects = false, $className = null)
+    public function runQuery($queryText, $fetchAsObjects = false, $className = null)
     {
         // echo "Running " . $queryText . "<br />";
         
@@ -152,17 +152,6 @@ class DbWrapper
         }
         
         return $returnArray;
-    }
-    
-    private function fetch_next_object($result, $className)
-    {
-        echo "In fetch next object";
-        if ($className != null)
-        {
-            return $result->fetch_object($className);
-        }
-        
-        return $result->fetch_object();
     }
 }
 
