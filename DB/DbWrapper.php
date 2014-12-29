@@ -21,7 +21,7 @@ class DbWrapper
      */
     public function getUserContextByID($userID)
     {
-        return self::getUserContext("SELECT * FROM User WHERE UserID = " . $userID . " LIMIT 1;", null);
+        return self::getUserContext("SELECT * FROM User WHERE UserID = :userID LIMIT 1;", array(":userID" => $userID));
     }
     
     public function getUserContextByApiKey($apiKey)
@@ -42,7 +42,7 @@ class DbWrapper
         $user = User::createFromDbObject($selectUserResult[0]);
         
         // Populate categories and key indicators
-        $selectCategoriesResult = self::runQueryWithParameters("SELECT * FROM Category WHERE UserID = " . $user->UserID . ";", $parameters, true);
+        $selectCategoriesResult = self::runQueryWithParameters("SELECT * FROM Category WHERE UserID = :userID;", array(":userID" => $user->UserID), true);
         if (sizeof($selectCategoriesResult) > 0)
         {
             // Populate the categories and store the category IDs
