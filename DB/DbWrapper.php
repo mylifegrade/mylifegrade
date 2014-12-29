@@ -29,9 +29,9 @@ class DbWrapper
         return self::getUserContext("SELECT * FROM User WHERE ApiKey = '" . $apiKey . "' LIMIT 1;");
     }
     
-    private function getUserContext($queryText)
+    private function getUserContext($statement)
     {
-        $selectUserResult = self::runQuery($queryText, true);
+        $selectUserResult = self::runQuery($statement, true);
         if (sizeof($selectUserResult) == 0)
         {
             // No user found
@@ -81,13 +81,12 @@ class DbWrapper
     }
     
     
-    
     /*
      * GENERIC QUERY METHODS
      */
-    public function runQueryJson($queryText, $prettyPrint = false)
+    public function runQueryJson($statement, $prettyPrint = false)
     {
-        $obj = $this->runQuery($queryText, true);
+        $obj = $this->runQuery($statement, true);
         if ($prettyPrint)
         {
             return json_encode($obj, JSON_PRETTY_PRINT);
@@ -98,9 +97,9 @@ class DbWrapper
         }
     }
     
-    public function runQuery($queryText, $fetchAsObjects = false, $className = null)
+    public function runQuery($statement, $fetchAsObjects = false, $className = null)
     {
-        // echo "Running " . $queryText . "<br />";
+        // echo "Running " . $statement . "<br />";
         
         // Create the MySQL connection
         $dbConn = null;
@@ -121,7 +120,7 @@ class DbWrapper
         $result = null;
         try
         {
-            $result = $dbConn->query($queryText);
+            $result = $dbConn->query($statement);
             if ($result == null)
             {
                 throw new Exception("The query result was initialized to null");
