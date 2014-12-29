@@ -26,7 +26,7 @@ class DbWrapper
     
     public function getUserContextByApiKey($apiKey)
     {
-        return self::getUserContext("SELECT * FROM User WHERE ApiKey = '" . $apiKey . "' LIMIT 1;", null);
+        return self::getUserContext("SELECT * FROM User WHERE ApiKey = :apiKey LIMIT 1;", array(":apiKey" => $apiKey));
     }
     
     private function getUserContext($queryText, $parameters)
@@ -107,21 +107,11 @@ class DbWrapper
         $dbConn = self::createDbConnection();
         $statement = $dbConn->prepare($queryText);
         
-        // Bind parameters
-        if ($parameters != null && sizeof($parameters) > 0)
-        {
-            $parameterKeys = array_keys($parameters);
-            foreach ($parameterKeys as $parameterKey)
-            {
-                $statement->bindValue($parameterKey, $parameters[$parameterKey]);
-            }
-        }
-
         // Logging
         // echo "Running " . $statement->queryString;
 
         // Execute the statement
-        $statement->execute();
+        $statement->execute($parameters);
         
         if ($fetchAsObjects)
         {
