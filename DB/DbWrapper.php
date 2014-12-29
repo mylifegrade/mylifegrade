@@ -97,11 +97,35 @@ class DbWrapper
         }
     }
     
-    public function runQuery($statement, $fetchAsObjects = false, $className = null)
+    public function runQuery($queryText, $fetchAsObjects = false, $className = null)
     {
-        // echo "Running " . $statement . "<br />";
+        return self::runQueryWithParameters($queryText, null, $fetchAsObjects, $className);
+    }
+    
+    public function runQueryWithParameters($queryText, $parameters, $fetchAsObjects = false, $className = null)
+    {
+        $dbConn = self::createDbConnection();
+        $statement = $dbConn->prepare($queryText);
+        $statement->execute($bindings);
         
-        // Create the MySQL connection
+        if ($fetchAsObjects)
+        {
+            if ($className != null)
+            {
+                // Return known object type
+                return $statement->fetchAll(PDO::FETCH_CLASS, $className);
+            }
+            
+            // Return anonymous objects
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        }
+        
+        // Return associative array
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    private function createDbConnection()
+    {
         $dbConn = null;
         try
         {
@@ -116,41 +140,7 @@ class DbWrapper
             die("Error while initializing the DB connection: " . $e->getMessage());
         }
         
-        // Issue the query
-        $result = null;
-        try
-        {
-            $result = $dbConn->query($statement);
-            if ($result == null)
-            {
-                throw new Exception("The query result was initialized to null");
-            }
-        }
-        catch (Exception $e)
-        {
-            die("Error while executing the DB query: " . $e->getMessage());
-        }
-        
-        // Determin the fetch method
-        if ($fetchAsObjects)
-        {
-            if ($className != null)
-            {
-                $result->setFetchMode(PDO::FETCH_CLASS, $className);
-            }
-            else
-            {
-                $result->setFetchMode(PDO::FETCH_OBJ);
-            }
-        }
-        
-        // Build an array to return
-        $returnArray = array();
-        while ($returnValue = $result->fetch()) {
-            array_push($returnArray, $returnValue);
-        }
-        
-        return $returnArray;
+        return $dbConn;
     }
 }
 
