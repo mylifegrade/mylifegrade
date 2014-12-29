@@ -10,7 +10,7 @@ CREATE TABLE User (
 	PasswordHash VARCHAR(200),
 	PasswordSalt INT NOT NULL DEFAULT 0,
 	Email VARCHAR(200),
-    CreatedOn TIMESTAMP NOT NULL,
+    CreatedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	LastActivityDate TIMESTAMP NOT NULL,
 	UserType INT NOT NULL DEFAULT 0,
 	CurrentPoints INT NOT NULL DEFAULT 0,
@@ -24,7 +24,7 @@ CREATE TABLE Category (
     CategoryName VARCHAR(200),
     CategoryDescription VARCHAR(2000),
     CategoryWeight INT NOT NULL,
-    CreatedOn TIMESTAMP NOT NULL,
+    CreatedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     IsActive BOOL NOT NULL DEFAULT 1
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE KeyIndicator (
     KeyIndicatorName VARCHAR(200),
     KeyIndicatorDescription VARCHAR(2000),
     KeyIndicatorWeight INT NOT NULL,
-    CreatedOn TIMESTAMP NOT NULL,
+    CreatedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     IsActive BOOL NOT NULL DEFAULT 1
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE KeyIndicator (
 CREATE TABLE DailyKeyIndicatorReport (
     ReportID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     KeyIndicatorID INT NOT NULL, -- TODO: Make this an FK
-    CreatedOn TIMESTAMP NOT NULL,
+    CreatedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     AchievedPercentage DECIMAL NOT NULL DEFAULT 0,
     Notes VARCHAR(2000)
 );

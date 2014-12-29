@@ -80,6 +80,18 @@ class DbWrapper
         return $user;
     }
     
+    /*
+     * CATEGORY METHODS
+     */
+    public function addCategory($user, $category)
+    {
+        /*
+        insert into Category (UserID, CategoryName, CategoryDescription, CategoryWeight, IsActive)
+        ->   values (1, 'Test Category', 'Test Description', 1, true);
+    */
+    }
+    
+    
     
     /*
      * GENERIC QUERY METHODS
