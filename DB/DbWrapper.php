@@ -102,11 +102,26 @@ class DbWrapper
         return self::runQueryWithParameters($queryText, null, $fetchAsObjects, $className);
     }
     
-    public function runQueryWithParameters($queryText, $parameters, $fetchAsObjects = false, $className = null)
+    public function runQueryWithParameters($queryText, $parameters = null, $fetchAsObjects = false, $className = null)
     {
         $dbConn = self::createDbConnection();
         $statement = $dbConn->prepare($queryText);
-        $statement->execute($bindings);
+        
+        // Bind parameters
+        if ($parameters != null && sizeof($parameters) > 0)
+        {
+            $parameterKeys = array_keys($parameters);
+            foreach ($parameterKeys as $parameterKey)
+            {
+                $statement->bindValue($parameterKey, $parameters[$parameterKey]);
+            }
+        }
+
+        // Logging
+        // echo "Running " . $statement->queryString;
+
+        // Execute the statement
+        $statement->execute();
         
         if ($fetchAsObjects)
         {
