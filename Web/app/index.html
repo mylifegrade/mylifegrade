@@ -105,8 +105,17 @@
               <!-- Goals section -->
               <div id="sectionGoals" ng-show="homeCtrl.isActiveTab('tabGoals')">
                 <h3 class="sectionTitle">Goals</h3>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Add a category</h3>
+                  </div>
+                  <div class="panel-body">
+                    You can add a category here
+                  </div>
+                </div>
+                
                 <div ng-repeat="category in homeCtrl.user.Categories">
-                  Hi there
+                  This is a category
                 </div>
               </div>
               
