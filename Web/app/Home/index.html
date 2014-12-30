@@ -21,7 +21,7 @@
     <script src="../Shared/angular/angular.min.js"></script>
     
     <!-- Resources -->
-    <script src="../Shared/app.js"></script>
+    <script src="app.js"></script>
   </head>
 
   <body>
@@ -43,16 +43,16 @@
       <div class="row">
         <div class="col-md-3">
           <div class="well">
-            <h3>{{ homeCtrl.currentUser.UserName }}</h3>
-            <p>{{ homeCtrl.currentUser.Email }}</p>
-            <p ng-show="homeCtrl.currentUser.UserType == 1">
+            <h3>{{ homeCtrl.user.UserName }}</h3>
+            <p>{{ homeCtrl.user.Email }}</p>
+            <p ng-show="homeCtrl.user.UserType == 1">
               <strong>Admin</strong>
             </p>
           </div>
         </div>
         <div class="col-md-9">
           <pre>
-            {{ homeCtrl.currentUser }}
+            {{ homeCtrl.user }}
           </pre>
         </div>
       </div>
