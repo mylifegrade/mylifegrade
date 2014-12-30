@@ -26,6 +26,15 @@
     <!-- Angular Scripts -->
     <script src="app.js" type="text/javascript"></script>
     
+    <!-- Page CSS -->
+    <style type="text/css">
+      .sectionTitle
+      {
+        margin-top: 0;
+        margin-bottom: 1em;
+      }
+    </style>
+    
   </head>
 
   <body ng-controller="HomeController as homeCtrl">
@@ -53,7 +62,7 @@
     </nav>
 
     <!-- Body -->
-    <div class="container-fluid" style="margin-top: 60px;">
+    <div class="container-fluid" style="margin-top: 80px;">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           
@@ -71,42 +80,60 @@
                 <li ng-class="{ active: homeCtrl.isActiveTab('tabOverview')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabOverview')">Overview</a></li>
                 <li ng-class="{ active: homeCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabGoals')">Goals</a></li>
                 <li ng-class="{ active: homeCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabSettings')">Settings</a></li>
+                <li ng-class="{ active: homeCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabJson')">JSON</a></li>
               </ul>
             </div>
             
             <!-- Main content -->
             <div class="col-md-10">
               
-              <!-- Overview panel -->
-              <div ng-show="homeCtrl.isActiveTab('tabOverview')" class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Overview</h3>
-                </div>
-                <div class="panel-body">
-                  This is the overview panel
-                </div>
-              </div>
-              
-              <!-- Goals panel -->
-              <div ng-show="homeCtrl.isActiveTab('tabGoals')" class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Goals</h3>
-                </div>
-                <div class="panel-body">
-                  This is the goals panel
+              <!-- Overview section -->
+              <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabOverview')">
+                <h3 class="sectionTitle">Overview</h3>
+                <div  class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Overview</h3>
+                  </div>
+                  <div class="panel-body">
+                    This is the overview panel
+                  </div>
                 </div>
               </div>
               
-              <!-- Settings panel -->
-              <div ng-show="homeCtrl.isActiveTab('tabSettings')" class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Settings</h3>
-                </div>
-                <div class="panel-body">
-                  This is the settings panel
+              
+              
+              <!-- Goals section -->
+              <div id="sectionGoals" ng-show="homeCtrl.isActiveTab('tabGoals')">
+                <h3 class="sectionTitle">Goals</h3>
+                <div ng-repeat="category in homeCtrl.user.Categories">
+                  Hi there
                 </div>
               </div>
               
+              <!-- Settings section -->
+              <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabSettings')">
+                <h3 class="sectionTitle">Settings</h3>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Settings</h3>
+                  </div>
+                  <div class="panel-body">
+                    This is the settings panel
+                  </div>
+                </div>
+              </div>
+              
+              <div id="sectionJson" ng-show="homeCtrl.isActiveTab('tabJson')">
+                <h3 class="sectionTitle">JSON</h3>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">JSON</h3>
+                  </div>
+                  <div class="panel-body">
+                    <pre>{{ homeCtrl.serialize(homeCtrl.user, true, false) }}</pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
