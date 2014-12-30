@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('myLifeGrade', []); 
-    app.controller('HomeController', [ '$http', function($http) {
+    app.controller('UserController', [ '$http', function($http) {
        
         // Init
         this.user = { };
