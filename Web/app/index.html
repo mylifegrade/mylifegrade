@@ -56,6 +56,7 @@
     <div class="container-fluid" style="margin-top: 60px;">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
+          
           <!-- Alert message -->
           <div ng-show="homeCtrl.error != null" class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -63,19 +64,19 @@
           </div>
           
           <div class="row">
-            <div class="col-md-3">
-              <div class="well">
-                <h3>{{ homeCtrl.user.UserName }}</h3>
-                <p>{{ homeCtrl.user.Email }}</p>
-                <p ng-show="homeCtrl.user.UserType == 1">
-                  <strong>Admin</strong>
-                </p>
-              </div>
+            
+            <!-- Nav -->
+            <div class="col-md-2">
+              <ul class="nav nav-pills nav-stacked">
+                <li ng-class="{ active: homeCtrl.isActiveTab('tabOverview')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabOverview')">Overview</a></li>
+                <li ng-class="{ active: homeCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabGoals')">Goals</a></li>
+                <li ng-class="{ active: homeCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabSettings')">Settings</a></li>
+              </ul>
             </div>
-            <div class="col-md-9">
-              <pre>
-                {{ homeCtrl.user }}
-              </pre>
+            
+            <!-- Main content -->
+            <div class="col-md-10">
+              
             </div>
           </div>
         </div>
