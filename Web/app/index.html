@@ -77,6 +77,36 @@
             <!-- Main content -->
             <div class="col-md-10">
               
+              <!-- Overview panel -->
+              <div ng-show="homeCtrl.isActiveTab('tabOverview')" class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Overview</h3>
+                </div>
+                <div class="panel-body">
+                  This is the overview panel
+                </div>
+              </div>
+              
+              <!-- Goals panel -->
+              <div ng-show="homeCtrl.isActiveTab('tabGoals')" class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Goals</h3>
+                </div>
+                <div class="panel-body">
+                  This is the goals panel
+                </div>
+              </div>
+              
+              <!-- Settings panel -->
+              <div ng-show="homeCtrl.isActiveTab('tabSettings')" class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Settings</h3>
+                </div>
+                <div class="panel-body">
+                  This is the settings panel
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
