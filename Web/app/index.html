@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myLifeGrade">
+<html lang="en" ng-app="myLifeGrade" ng-controller="HomeController as homeCtrl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +37,7 @@
     
   </head>
 
-  <body ng-controller="HomeController as homeCtrl">
+  <body ng-controller="UserController as userCtrl">
     
     <!-- Nav -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -54,7 +54,7 @@
               <a class="navbar-brand" href="#">myLifeGrade</a>
             </div>
             <div class="navbar-text navbar-right">
-              {{ homeCtrl.user.UserName }}
+              {{ userCtrl.user.UserName }}
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
           <!-- Alert message -->
           <div ng-show="homeCtrl.error != null" class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error:</strong> {{ homeCtrl.error }}
+            <strong>Error:</strong> {{ userCtrl.error }}
           </div>
           
           <div class="row">
@@ -81,8 +81,8 @@
                 <li ng-class="{ active: homeCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabGoals')">Goals</a></li>
                 <li ng-class="{ active: homeCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabSettings')">Settings</a></li>
                 
-                <hr ng-show="homeCtrl.user.UserType == 1"></hr>
-                <li ng-show="homeCtrl.user.UserType == 1" ng-class="{ active: homeCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabJson')">JSON</a></li>
+                <hr ng-show="userCtrl.user.UserType == 1"></hr>
+                <li ng-show="userCtrl.user.UserType == 1" ng-class="{ active: homeCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabJson')">JSON</a></li>
               </ul>
             </div>
             
@@ -140,7 +140,7 @@
                     <h3 class="panel-title">JSON</h3>
                   </div>
                   <div class="panel-body">
-                    <pre>{{ homeCtrl.serialize(homeCtrl.user, true, false) }}</pre>
+                    <pre>{{ homeCtrl.serialize(userCtrl.user, true, false) }}</pre>
                   </div>
                 </div>
               </div>
