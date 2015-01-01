@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.ico">
 
-    <title>User</title>
+    <title>Home</title>
 
     <!-- Main Site CSS -->
     <link href="Site.css" rel="stylesheet">
@@ -37,7 +37,7 @@
     
   </head>
 
-  <body ng-controller="UserController as userCtrl">
+  <body ng-controller="HomeController as homeCtrl">
     
     <!-- Nav -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -54,7 +54,7 @@
               <a class="navbar-brand" href="#">myLifeGrade</a>
             </div>
             <div class="navbar-text navbar-right">
-              {{ userCtrl.user.UserName }}
+              {{ homeCtrl.user.UserName }}
             </div>
           </div>
         </div>
@@ -67,9 +67,9 @@
         <div class="col-md-10 col-md-offset-1">
           
           <!-- Alert message -->
-          <div ng-show="userCtrl.error != null" class="alert alert-danger alert-dismissible" role="alert">
+          <div ng-show="homeCtrl.error != null" class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error:</strong> {{ userCtrl.error }}
+            <strong>Error:</strong> {{ homeCtrl.error }}
           </div>
           
           <div class="row">
@@ -77,12 +77,12 @@
             <!-- Nav -->
             <div class="col-md-2">
               <ul class="nav nav-pills nav-stacked">
-                <li ng-class="{ active: userCtrl.isActiveTab('tabOverview')}" role="presentation"><a href ng-click="userCtrl.setActiveTab('tabOverview')">Overview</a></li>
-                <li ng-class="{ active: userCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="userCtrl.setActiveTab('tabGoals')">Goals</a></li>
-                <li ng-class="{ active: userCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="userCtrl.setActiveTab('tabSettings')">Settings</a></li>
+                <li ng-class="{ active: homeCtrl.isActiveTab('tabOverview')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabOverview')">Overview</a></li>
+                <li ng-class="{ active: homeCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabGoals')">Goals</a></li>
+                <li ng-class="{ active: homeCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabSettings')">Settings</a></li>
                 
-                <hr ng-show="userCtrl.user.UserType == 1"></hr>
-                <li ng-show="userCtrl.user.UserType == 1" ng-class="{ active: userCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="userCtrl.setActiveTab('tabJson')">JSON</a></li>
+                <hr ng-show="homeCtrl.user.UserType == 1"></hr>
+                <li ng-show="homeCtrl.user.UserType == 1" ng-class="{ active: homeCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabJson')">JSON</a></li>
               </ul>
             </div>
             
@@ -90,7 +90,7 @@
             <div class="col-md-10">
               
               <!-- Overview section -->
-              <div id="sectionOverview" ng-show="userCtrl.isActiveTab('tabOverview')">
+              <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabOverview')">
                 <h3 class="sectionTitle">Overview</h3>
                 <div  class="panel panel-default">
                   <div class="panel-heading">
@@ -103,7 +103,7 @@
               </div>
 
               <!-- Goals section -->
-              <div id="sectionGoals" ng-show="userCtrl.isActiveTab('tabGoals')">
+              <div id="sectionGoals" ng-show="homeCtrl.isActiveTab('tabGoals')">
                 <h3 class="sectionTitle">Goals</h3>
                 <div class="panel panel-default">
                   <div class="panel-heading">
@@ -114,13 +114,13 @@
                   </div>
                 </div>
                 
-                <div ng-repeat="category in userCtrl.user.Categories">
+                <div ng-repeat="category in homeCtrl.user.Categories">
                   This is a category
                 </div>
               </div>
               
               <!-- Settings section -->
-              <div id="sectionOverview" ng-show="userCtrl.isActiveTab('tabSettings')">
+              <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabSettings')">
                 <h3 class="sectionTitle">Settings</h3>
                 <div class="panel panel-default">
                   <div class="panel-heading">
@@ -133,14 +133,14 @@
               </div>
               
               <!-- JSON section -->
-              <div id="sectionJson" ng-show="userCtrl.isActiveTab('tabJson')">
+              <div id="sectionJson" ng-show="homeCtrl.isActiveTab('tabJson')">
                 <h3 class="sectionTitle">JSON</h3>
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">JSON</h3>
                   </div>
                   <div class="panel-body">
-                    <pre>{{ userCtrl.serialize(userCtrl.user, true, false) }}</pre>
+                    <pre>{{ homeCtrl.serialize(homeCtrl.user, true, false) }}</pre>
                   </div>
                 </div>
               </div>
