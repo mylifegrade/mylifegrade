@@ -2,9 +2,8 @@
     var app = angular.module('myLifeGrade', []); 
     
     app.controller('HomeController', function() {
-        
         // Init
-        this.activeTabName = 'tabOverview';
+        this.activeTabName = 'tabGoals';
         
         // Tabs
         this.setActiveTab = function(tabName) {
@@ -28,7 +27,6 @@
     });
     
     app.controller('UserController', [ '$http', function($http) {
-       
         // Init
         this.user = { };
         
@@ -42,4 +40,14 @@
            tmp.error = JSON.stringify(data);
         });
     }]);
+    
+    app.controller('CategoryController', function() {
+        // Init
+        this.category = {};
+        
+        // Stuff
+        this.addCategory = function(user) {
+            user.Categories.push(this.category);
+        };
+    });
 })();
