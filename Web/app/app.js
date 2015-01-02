@@ -47,6 +47,7 @@
         
         // Stuff
         this.addCategory = function(user) {
+            alert('Hi');
             user.Categories.push(this.category);
         };
     });
