@@ -43,11 +43,12 @@
     
     app.controller('CategoryController', function() {
         // Init
-        this.category = {};;
+        this.category = { CategoryWeight: 1};
         
         // Stuff
         this.addCategory = function(user) {
             user.Categories.push(this.category);
+            this.category = { CategoryWeight: 1};
         };
     });
 })();
