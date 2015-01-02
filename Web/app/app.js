@@ -44,11 +44,13 @@
     app.controller('CategoryController', function() {
         // Init
         this.category = {};
+        this.category.Name = 'A name';
+        this.category.Description = 'A description';
         
         // Stuff
         this.addCategory = function(user) {
-            alert('Hi');
             user.Categories.push(this.category);
+            user.Name += ' - now';
         };
     });
 })();
