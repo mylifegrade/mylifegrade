@@ -90,11 +90,12 @@
               <div id="sectionGoals" ng-show="homeCtrl.isActiveTab('tabGoals')">
                 <h3 class="sectionTitle">Goals</h3>
                 <div class="panel panel-default">
+                  
+                  <!-- Add category -->
                   <div class="panel-heading">
                     <h3 class="panel-title">Add a category</h3>
                   </div>
                   <div class="panel-body" ng-controller="CategoryController as categoryCtrl">
-                    
                     <form name="addCategoryForm" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
                       <div class="form-group">
                         <label for="categoryName">Name</label>

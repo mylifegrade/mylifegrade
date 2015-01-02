@@ -24,12 +24,13 @@ abstract class ApiWrapper
                 // Authenticate
                 if ($requireApiKey)
                 {
-                    if (!isset($_GET["apiKey"]))
+                    $apiKey = self::getFormValue("apiKey");
+                    if ($apiKey == null)
                     {
                         throw new ApiException(403, "No API key provided");
                     }
                     
-                    $this->userContext = $this->db->getUserContextByApiKey($_GET["apiKey"]);
+                    $this->userContext = $this->db->getUserContextByApiKey($apiKey);
                     if ($this->userContext == null)
                     {
                         throw new ApiException(403, "Not authenticated");
@@ -54,10 +55,14 @@ abstract class ApiWrapper
         }
         
         // Determine whether to pretty print
-        $prettyPrint = false;
-        if (isset($_GET["prettyprint"]))
+        $prettyPrint = self::getFormValue("prettyprint");
+        if ($prettyPrint == null)
         {
-            $prettyPrint = (bool)($_GET["prettyprint"]);
+            $prettyPrint = false;
+        }
+        else
+        {
+            $prettyPrint = (bool)$prettyPrint;
         }
         
         // Print out the results
@@ -68,6 +73,29 @@ abstract class ApiWrapper
         else
         {
             return json_encode($result);
+        }
+    }
+    
+    protected function getFormValue($keyName)
+    {
+        $methodDictionary = self::getMethodDictionary();
+        return isset($methodDictionary[$keyName]) ? $methodDictionary[$keyName] : null;
+    }
+    
+    protected function getMethodDictionary()
+    {
+        switch ($_SERVER['REQUEST_METHOD'])
+        {
+            case "GET":
+                return $_GET;
+            case "POST":
+                return $_POST;
+            case "PUT":
+                return $_PUT;
+            case "DELETE":
+                return $_DELETE;
+            default:
+                throw new Exception("Unknown HTTP Method");
         }
     }
 }

@@ -48,7 +48,7 @@
         // Stuff
         this.addCategory = function(user) {
             user.Categories.push(this.category);
-            this.category = { CategoryWeight: 1};
+            this.category = { CategoryWeight: 1 };
         };
     });
 })();
