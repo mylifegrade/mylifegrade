@@ -97,6 +97,12 @@
                     
                     <form name="addCategoryForm" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
                       <input type="text" ng-model="categoryCtrl.category.CategoryName" />
+                      <textarea ng-model="categoryCtrl.category.CategoryDescription"></textarea>
+                      <select ng-model="categoryCtrl.category.CategoryWeight">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
                       <input type="submit" value="Add" />
                     </form>
                     
@@ -110,7 +116,8 @@
                     <h3 class="panel-title">{{ category.CategoryName }}</h3>
                   </div>
                   <div class="panel-body">
-                    Categor stuff here
+                    <p>{{ category.CategoryDescription }}</p>
+                    <p>Weight: {{ category.CategoryWeight }}</p>
                   </div>
                 </div>
               </div>
