@@ -84,19 +84,7 @@ abstract class ApiWrapper
     
     protected function getMethodDictionary()
     {
-        switch ($_SERVER['REQUEST_METHOD'])
-        {
-            case "GET":
-                return $_GET;
-            case "POST":
-                return $_POST;
-            case "PUT":
-                return $_PUT;
-            case "DELETE":
-                return $_DELETE;
-            default:
-                throw new Exception("Unknown HTTP Method");
-        }
+        return $_GET;
     }
 }
 

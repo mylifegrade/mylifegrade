@@ -9,7 +9,7 @@ class CategoriesApiWrapper extends ApiWrapper
         switch ($method)
         {
             case "POST":
-                
+                return "Well, hi!";
             default:
                 throw new ApiException(001, "Unrecognized HTTP method: " . $method);
         }
