@@ -95,7 +95,7 @@
                   </div>
                   <div class="panel-body" ng-controller="CategoryController as categoryCtrl">
                     
-                    <form name="addCategoryForm">
+                    <form name="addCategoryForm" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
                       <input type="text" ng-model="categoryCtrl.category.CategoryName" />
                       <input type="submit" value="Add" />
                     </form>

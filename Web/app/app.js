@@ -43,7 +43,7 @@
     
     app.controller('CategoryController', function() {
         // Init
-        this.category = {};
+        this.category = {};;
         
         // Stuff
         this.addCategory = function(user) {
