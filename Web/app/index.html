@@ -95,11 +95,11 @@
                     <div class="panel-heading" role="tab" id="headingAddCategory">
                       <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordionAddCategory" href="#collapseAddCategory" aria-expanded="true" aria-controls="collapseAddCategory">
-                          Add a category
+                          Add a category <i class="glyphicon glyphicon-plus pull-right"></i>
                         </a>
                       </h4>
                     </div>
-                    <div id="collapseAddCategory" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingAddCategory">
+                    <div id="collapseAddCategory" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddCategory">
                       <div class="panel-body">
                         <form name="addCategoryForm" ng-controller="CategoryController as categoryCtrl" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
                           <div class="form-group">
