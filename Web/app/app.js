@@ -31,13 +31,13 @@
         this.user = { };
         
         // Data collection from API
-        var tmp = this;
+        var thisCtrl = this;
         $http.get('../api/current_user.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true')
         .success(function(data) {
-           tmp.user = data;
+           thisCtrl.user = data;
         })
         .error(function(data){
-           tmp.error = JSON.stringify(data);
+           alert(JSON.stringify(data));
         });
     }]);
     
@@ -47,15 +47,17 @@
         
         // Stuff
         this.addCategory = function(user) {
-            var tmp = this;
-            $http.post('../api/categories.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true', tmp.category)
+            // Temporary callback variables
+            var thisCtrl = this;
+            var thisUser = user;
+            
+            // Issue the post
+            $http.post('../api/categories.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true', thisCtrl.category)
             .success(function(data) {
-               alert('Success');
-               tmp.user = data;
+               thisUser.Categories = data.Categories;
             })
             .error(function(data){
-               alert('Error');
-               tmp.error = JSON.stringify(data);
+               alert(JSON.stringify(data));
             });
         };
     }]);
