@@ -16,7 +16,7 @@ class Category
     
     public static function createFromDbObject($dbCategory)
     {
-        return static::create($dbCategory->CategoryID, $dbCategory->UserID, $dbCategory->CategoryDescription, $dbCategory->CategoryWeight, $dbCategory->CreatedOn, $dbCategory->IsActive);
+        return static::create($dbCategory->CategoryID, $dbCategory->UserID, $dbCategory->CategoryName, $dbCategory->CategoryDescription, $dbCategory->CategoryWeight, $dbCategory->CreatedOn, $dbCategory->IsActive);
     }
     
     public static function create($categoryID, $userID, $categoryName, $categoryDescription, $categoryWeight, $createdOn, $isActive)

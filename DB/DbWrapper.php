@@ -109,7 +109,6 @@ class DbWrapper
         $queryText .= " values (:userID, :categoryName, :categoryDescription, :categoryWeight, :isActive, :createdOn);";
         $parameters = array(
             ":userID" => $category->UserID,
-            ":categoryName" => $category->CategoryID,
             ":categoryName" => $category->CategoryName,
             ":categoryDescription" => $category->CategoryDescription,
             ":categoryWeight" => $category->CategoryWeight,

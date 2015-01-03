@@ -32,7 +32,7 @@
         
         // Data collection from API
         var tmp = this;
-        $http.get('../api/current_user.php?apiKey=52a1a816-92f0-11e4-86fb-02d737fe62fd&prettyprint=true')
+        $http.get('../api/current_user.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true')
         .success(function(data) {
            tmp.user = data;
         })
@@ -41,14 +41,23 @@
         });
     }]);
     
-    app.controller('CategoryController', function() {
+    app.controller('CategoryController', ['$http', function($http) {
         // Init
         this.category = { CategoryWeight: 1};
         
         // Stuff
         this.addCategory = function(user) {
-            user.Categories.push(this.category);
-            this.category = { CategoryWeight: 1 };
+            var tmp = this;
+            $http.post('../api/categories.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true', tmp.category)
+            .success(function(data) {
+               alert('Success');
+               tmp.user = data;
+            })
+            .error(function(data){
+               alert('Error');
+               tmp.error = JSON.stringify(data);
+            });
         };
-    });
+    }]);
+        
 })();
