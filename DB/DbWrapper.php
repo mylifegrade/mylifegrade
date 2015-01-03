@@ -10,9 +10,24 @@ class DbWrapper
     const DB_NAME = "myLifeGrade";
     const PORT = 3306;
     
+    private $dbConn;
+    
     public function __construct() 
     {
-        
+        // Create the connection to use
+        $this->dbConn = null;
+        try
+        {
+            $this->dbConn = new PDO("mysql:host=" . self::HOST_NAME . ";port=" . self::PORT . ";dbname=" . self::DB_NAME, self::USER_NAME, self::PASSWORD);
+            if ($this->dbConn == null)
+            {
+                throw new Exception("The connection was initialized to null");
+            }
+        }
+        catch (Exception $e)
+        {
+            die("Error while initializing the DB connection: " . $e->getMessage());
+        }
     }
     
     /*
@@ -84,18 +99,32 @@ class DbWrapper
      */
     public function addCategory($user, $category)
     {
-        // Insert the category
-        $queryText = "insert into Category (UserID, CategoryName, CategoryDescription, CategoryWeight, IsActive)";
-        $queryText .= " values (:userID, :categoryName, :categoryDescription, :categoryWeight, true);";
+        // Prep the object for injection
+        $category->UserID = $user->UserID;
+        $category->CreatedOn = self::now();
+        $category->IsActive = true;
+        
+        // Prepare the statement
+        $queryText = "insert into Category (UserID, CategoryName, CategoryDescription, CategoryWeight, IsActive, CreatedOn)";
+        $queryText .= " values (:userID, :categoryName, :categoryDescription, :categoryWeight, :isActive, :createdOn);";
         $parameters = array(
-            ":userID" => $user->UserID,
+            ":userID" => $category->UserID,
             ":categoryName" => $category->CategoryID,
             ":categoryName" => $category->CategoryName,
-            ":categoryDescription" => $category->Description,
-            ":categoryWeight" => $category->CategoryWeight
+            ":categoryDescription" => $category->CategoryDescription,
+            ":categoryWeight" => $category->CategoryWeight,
+            ":isActive" => $category->IsActive,
+            ":createdOn" => $category->CreatedOn
         );
+        
+        // Insert the category and populate the ID
         $category->CategoryID = self::runStatementGetLastInsertedID($queryText, $parameters);
         
+        // Handle KeyIndicators
+        if ($category->KeyIndicators == null)
+        {
+            $category->KeyIndicators = array();
+        }
         if (sizeof($category->KeyIndicators) > 0)
         {
             foreach ($category->KeyIndicators as $keyIndicator)
@@ -158,35 +187,21 @@ class DbWrapper
     public function runStatementGetLastInsertedID($queryText, $parameters = null)
     {
         $statement = self::createAndExecuteStatement($queryText, $parameters);
-        // TODO: Get the last inserted ID
+        return $this->dbConn->lastInsertId();
     }
     
     public function runStatementGetAffectedRows($queryText, $parameters = null)
     {
         $statement = self::createAndExecuteStatement($queryText, $parameters);
-        // TODO: Get the count of affected rows
+        return $statement->rowCount();
     }
     
     private function createAndExecuteStatement($queryText, $parameters = null)
     {
         // echo "Preparing to run " . $queryText;
         
-        $dbConn = null;
-        try
-        {
-            $dbConn = new PDO("mysql:host=" . self::HOST_NAME . ";port=" . self::PORT . ";dbname=" . self::DB_NAME, self::USER_NAME, self::PASSWORD);
-            if ($dbConn == null)
-            {
-                throw new Exception("The connection was initialized to null");
-            }
-        }
-        catch (Exception $e)
-        {
-            die("Error while initializing the DB connection: " . $e->getMessage());
-        }
-        
         // Create the statement
-        $statement = $dbConn->prepare($queryText);
+        $statement = $this->dbConn->prepare($queryText);
         
         // Logging
         // echo "Running " . $statement->queryString;
@@ -196,6 +211,11 @@ class DbWrapper
         
         // Return the statement
         return $statement;
+    }
+    
+    private function now()
+    {
+        return date("c");
     }
 }
 
