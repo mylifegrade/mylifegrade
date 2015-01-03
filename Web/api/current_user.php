@@ -4,15 +4,14 @@ require 'api_base.php';
 
 class CurrentUserApiWrapper extends ApiWrapper
 {
-    public function doWork($method, $requestBody)
+    public function doGet()
     {
-        switch ($method)
-        {
-            case "GET":
-                return $this->userContext;
-            default:
-                throw new ApiException(001, "Unrecognized HTTP method: " . $method);
-        }
+        return $this->userContext;
+    }
+    
+    public function doPost($requestBody)
+    {
+        throw new Exception("Not Implemented");
     }
 }
 

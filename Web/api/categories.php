@@ -4,26 +4,26 @@ require 'api_base.php';
 
 class CategoriesApiWrapper extends ApiWrapper
 {
-    public function doWork($method, $requestBody)
+    public function doGet()
     {
-        switch ($method)
+        return $this->userContext->Categories;
+    }
+    
+    public function doPost($requestBody)
+    {
+        if (strlen($requestBody) == 0)
         {
-            case "POST":
-                $categoryPostDataString = file_get_contents('php://input');
-                if (strlen($categoryPostDataString) > 0)
-                {
-                    $category = json_decode($categoryPostDataString);
-                    if ($category == null)
-                    {
-                        throw new ApiException(123, "Bad JSon data");
-                    }
-                    
-                    $this->db->addCategory($this->userContext, $category);
-                    return $this->userContext;
-                }
-            default:
-                throw new ApiException(001, "Unrecognized HTTP method: " . $method);
+            throw new ApiException(100, "No request body specified");
         }
+        
+        $category = json_decode($requestBody);
+        if ($category == null)
+        {
+            throw new ApiException(123, "Bad JSON data");
+        }
+        
+        $this->db->addCategory($this->userContext, $category);
+        return $this->userContext;
     }
 }
 

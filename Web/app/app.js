@@ -54,6 +54,7 @@
             // Issue the post
             $http.post('../api/categories.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true', thisCtrl.category)
             .success(function(data) {
+               alert(JSON.stringify(data));
                thisUser.Categories = data.Categories;
             })
             .error(function(data){
