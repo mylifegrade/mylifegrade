@@ -90,6 +90,7 @@
               <div id="sectionGoals" ng-show="homeCtrl.isActiveTab('tabGoals')">
                 <h3 class="sectionTitle">Goals</h3>
                 
+                <!-- Add category panel -->
                 <div class="panel-group" id="accordionAddCategory" role="tablist" aria-multiselectable="true">
                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingAddCategory">
@@ -124,6 +125,24 @@
                             <button type="submit" class="btn btn-primary pull-right">Add</button>
                           </div>
                         </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Add key indicator panel -->
+                <div class="panel-group" id="accordionAddKeyIndicator" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingAddKeyIndicator">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordionAddKeyIndicator" href="#collapseAddKeyIndicator" aria-expanded="true" aria-controls="collapseAddKeyIndicator">
+                          Add a key indicator <i class="glyphicon glyphicon-plus pull-right"></i>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseAddKeyIndicator" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddKeyIndicator">
+                      <div class="panel-body">
+
                       </div>
                     </div>
                   </div>
