@@ -60,7 +60,7 @@ class User
         }
         
         // Add the key indicator to its category
-        $this->Categories[$category->CategoryID]->KeyIndicators[$keyIndicator->KeyIndicatorID] = $keyIndicator;
+        $this->Categories[$keyIndicator->CategoryID]->KeyIndicators[$keyIndicator->KeyIndicatorID] = $keyIndicator;
     }
 }
 
