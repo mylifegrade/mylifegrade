@@ -133,11 +133,13 @@
                 
                 <div ng-repeat="category in userCtrl.user.Categories" class="panel panel-default">
                   <div class="panel-heading">
-                    <h3 class="panel-title">{{ category.CategoryName }}</h3>
+                    <h3 class="panel-title">
+                      {{ category.CategoryName }}
+                      <span class="badge pull-right">{{ category.CategoryWeight }}</span>
+                    </h3>
                   </div>
                   <div class="panel-body">
                     <p>{{ category.CategoryDescription }}</p>
-                    <p>Weight: {{ category.CategoryWeight }}</p>
                   </div>
                 </div>
               </div>
