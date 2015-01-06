@@ -54,7 +54,7 @@ class User
     
     function addKeyIndicator($keyIndicator)
     {
-        if (!array_key_exists($keyIndicator->CategoryID))
+        if (!array_key_exists($keyIndicator->CategoryID, $this->Categories))
         {
             throw new Exception("Category ID " . $keyIndicator->CategoryID . " has not been added yet");
         }

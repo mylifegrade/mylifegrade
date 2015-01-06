@@ -68,7 +68,20 @@
         
         // Stuff
         this.addKeyIndicator = function (category) {
-            // TODO: Do stuff
+            // Temporary callback variables
+            var thisCtrl = this;
+            var thisCategory = category;
+            
+            alert('About to send ' + JSON.stringify(thisCtrl.keyIndicator));
+            
+            // Issue the post
+            $http.post('../api/key_indicators.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&categoryID=' + thisCategory.CategoryID + '&prettyprint=true', thisCtrl.keyIndicator)
+            .success(function(data) {
+               thisCategory.KeyIndicators = data.KeyIndicators;
+            })
+            .error(function(data) {
+               alert("ERROR:" + JSON.stringify(data));
+            });
         };
     }]);
         

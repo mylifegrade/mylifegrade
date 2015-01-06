@@ -69,7 +69,7 @@ class DbWrapper
             }
             
             // Build a query for the key indicators given the category IDs
-            $selectKeyIndicatorsQueryText = "SELECT * FROM KeyIndicators WHERE  CategoryID in (";
+            $selectKeyIndicatorsQueryText = "SELECT * FROM KeyIndicator WHERE CategoryID in (";
             $first = true;
             foreach ($categoryIDs as $categoryID)
             {
@@ -78,11 +78,12 @@ class DbWrapper
                     $selectKeyIndicatorsQueryText .= ", ";
                 }
                 $selectKeyIndicatorsQueryText .= $categoryID;
+                $first = false;
             }
             $selectKeyIndicatorsQueryText .= ");";
             
             // Populate the key indicators
-            $selectKeyIndicatorsResult = self::runQuery($selectKeyIndicatorsQueryText, true);
+            $selectKeyIndicatorsResult = self::runQuery($selectKeyIndicatorsQueryText, null, true);
             foreach ($selectKeyIndicatorsResult as $selectKeyIndicatorResult)
             {
                 $keyIndicator = KeyIndicator::createFromDbObject($selectKeyIndicatorResult);
@@ -145,6 +146,12 @@ class DbWrapper
      */
     public function addKeyIndicator($category, $keyIndicator)
     {
+        // Prep the object for injection
+        $keyIndicator->CategoryID = $category->CategoryID;
+        $keyIndicator->CreatedOn = self::now();
+        $keyIndicator->IsActive = true;
+        
+        // Prepare the statement
         $queryText = "insert into KeyIndicator (CategoryID, KeyIndicatorName, KeyIndicatorDescription, KeyIndicatorWeight, IsActive)";
         $queryText .= " values (:categoryID, :keyIndicatorName, :keyIndicatorDescription, :keyIndicatorWeight, :isActive);";
         $parameters = array(
@@ -154,8 +161,14 @@ class DbWrapper
             ":keyIndicatorWeight" => $keyIndicator->KeyIndicatorWeight,
             ":isActive" => $keyIndicator->KeyIndicatorWeight
         );
+        
+        // Insert the key indicator and populate the ID
         $keyIndicator->KeyIndicatorID = self::runStatementGetLastInsertedID($queryText, $parameters);
+        
+        // Update the object passed to us
         $category->addKeyIndicator($keyIndicator);
+        
+        // Return the category
         return $category;
     }
     

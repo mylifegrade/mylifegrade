@@ -25,7 +25,7 @@ class KeyIndicatorsApiWrapper extends ApiWrapper
         }
         
         $this->db->addKeyIndicator($category, $keyIndicator);
-        return $this->userContext;
+        return $category;
     }
     
     private function getSpecifiedCategory()

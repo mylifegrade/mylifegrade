@@ -25,6 +25,14 @@
     
     <!-- Angular Scripts -->
     <script src="app.js" type="text/javascript"></script>
+    
+    <style type="text/css">
+      .categoryDescription {
+        border-left: 3px solid #ddd;
+        margin: 0 0 2em 0;
+        padding: 1em 1em 1em 2em;
+      }
+    </style>
   </head>
 
   <body ng-controller="UserController as userCtrl">
@@ -130,46 +138,6 @@
                   </div>
                 </div>
                 
-                <!-- Add key indicator panel -->
-                <div class="panel-group" id="accordionAddKeyIndicator" role="tablist" aria-multiselectable="true">
-                  <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingAddKeyIndicator">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordionAddKeyIndicator" href="#collapseAddKeyIndicator" aria-expanded="true" aria-controls="collapseAddKeyIndicator">
-                          Add a key indicator <i class="glyphicon glyphicon-plus pull-right"></i>
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseAddKeyIndicator" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddKeyIndicator">
-                      <div class="panel-body">
-                        <form name="addKeyIndicatorForm" ng-controller="KeyIndicatorController as keyIndicatorCtrl" ng-submit="keyIndicatorCtrl.addKeyIndicator(userCtrl.user.Categories[1])">
-                          <div class="form-group">
-                            <label for="keyIndicatorName">Name</label>
-                            <input id="keyIndicatorName" type="text" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorName" class="form-control" placeholder="Key Indicator Name"/>
-                          </div>
-                          <div class="form-group">
-                            <label for="keyIndicatorDescription">Description</label>
-                            <textarea id="keyIndicatorDescription" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorDescription" class="form-control" rows="3" placeholder="Key Indicator Description"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label for="keyIndicatorWeight">Weight</label>
-                            <select id="keyIndicatorWeight" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorWeight" class="form-control">
-                              <option value="1">1 - Very low</option>
-                              <option value="2">2 - Low</option>
-                              <option value="3">3 - Medium</option>
-                              <option value="4">4 - High</option>
-                              <option value="5">5 - Very high</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <button type="submit" class="btn btn-primary pull-right">Add</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
                 <hr />
                 
                 <div ng-repeat="category in userCtrl.user.Categories" class="panel panel-default">
@@ -180,7 +148,63 @@
                     </h3>
                   </div>
                   <div class="panel-body">
-                    <p>{{ category.CategoryDescription }}</p>
+                    <label>DESCRIPTION</label>
+                    <p class="categoryDescription">
+                      {{ category.CategoryDescription }}</p>
+                    
+                    <!-- Add key indicator panel -->
+                    <div class="panel-group" id="accordionAddKeyIndicator" role="tablist" aria-multiselectable="true">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingAddKeyIndicator">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordionAddKeyIndicator" href="#collapseAddKeyIndicator" aria-expanded="true" aria-controls="collapseAddKeyIndicator">
+                              Add a key indicator <i class="glyphicon glyphicon-plus pull-right"></i>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseAddKeyIndicator" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddKeyIndicator">
+                          <div class="panel-body">
+                            <form name="addKeyIndicatorForm" ng-controller="KeyIndicatorController as keyIndicatorCtrl" ng-submit="keyIndicatorCtrl.addKeyIndicator(category)">
+                              <div class="form-group">
+                                <label for="keyIndicatorName">Name</label>
+                                <input id="keyIndicatorName" type="text" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorName" class="form-control" placeholder="Key Indicator Name"/>
+                              </div>
+                              <div class="form-group">
+                                <label for="keyIndicatorDescription">Description</label>
+                                <textarea id="keyIndicatorDescription" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorDescription" class="form-control" rows="3" placeholder="Key Indicator Description"></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label for="keyIndicatorWeight">Weight</label>
+                                <select id="keyIndicatorWeight" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorWeight" class="form-control">
+                                  <option value="1">1 - Very low</option>
+                                  <option value="2">2 - Low</option>
+                                  <option value="3">3 - Medium</option>
+                                  <option value="4">4 - High</option>
+                                  <option value="5">5 - Very high</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <button type="submit" class="btn btn-primary pull-right">Add</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Key indicators -->
+                    <table class="table table-bordered" ng-show="category.KeyIndicators.length > 0">
+                      <thead>
+                        <tr>
+                          <th>Hi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>There</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

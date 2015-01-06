@@ -21,13 +21,13 @@ class KeyIndicator
     {
         $keyIndicator = new KeyIndicator();
         
-        $keyIndicator->KeyIndicatorID;
-        $keyIndicator->CategoryID;
-        $keyIndicator->KeyIndicatorName;
-        $keyIndicator->KeyIndicatorDescription;
-        $keyIndicator->KeyIndicatorWeight;
-        $keyIndicator->CreatedOn;
-        $keyIndicator->IsActive;
+        $keyIndicator->KeyIndicatorID = $keyIndicatorID;
+        $keyIndicator->CategoryID = $categoryID;
+        $keyIndicator->KeyIndicatorName = $keyIndicatorName;
+        $keyIndicator->KeyIndicatorDescription = $keyIndicatorDescription;
+        $keyIndicator->KeyIndicatorWeight = $keyIndicatorWeight;
+        $keyIndicator->CreatedOn = $createdOn;
+        $keyIndicator->IsActive = $isActive;
         
         $keyIndicator->DailyKeyIndicatorReports = array();
         
