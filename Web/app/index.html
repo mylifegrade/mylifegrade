@@ -142,7 +142,29 @@
                     </div>
                     <div id="collapseAddKeyIndicator" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddKeyIndicator">
                       <div class="panel-body">
-
+                        <form name="addKeyIndicatorForm" ng-controller="KeyIndicatorController as keyIndicatorCtrl" ng-submit="keyIndicatorCtrl.addKeyIndicator(userCtrl.user.Categories[1])">
+                          <div class="form-group">
+                            <label for="keyIndicatorName">Name</label>
+                            <input id="keyIndicatorName" type="text" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorName" class="form-control" placeholder="Key Indicator Name"/>
+                          </div>
+                          <div class="form-group">
+                            <label for="keyIndicatorDescription">Description</label>
+                            <textarea id="keyIndicatorDescription" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorDescription" class="form-control" rows="3" placeholder="Key Indicator Description"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="keyIndicatorWeight">Weight</label>
+                            <select id="keyIndicatorWeight" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorWeight" class="form-control">
+                              <option value="1">1 - Very low</option>
+                              <option value="2">2 - Low</option>
+                              <option value="3">3 - Medium</option>
+                              <option value="4">4 - High</option>
+                              <option value="5">5 - Very high</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-primary pull-right">Add</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>

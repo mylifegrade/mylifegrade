@@ -61,5 +61,15 @@
             });
         };
     }]);
+    
+    app.controller('KeyIndicatorController', ['$http', function($http) {
+        // Init
+        this.keyIndicator = { KeyIndicatorWeight: 3 };
+        
+        // Stuff
+        this.addKeyIndicator = function (category) {
+            // TODO: Do stuff
+        };
+    }]);
         
 })();
