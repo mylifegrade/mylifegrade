@@ -32,7 +32,7 @@
         
         // Data collection from API
         var thisCtrl = this;
-        $http.get('../api/current_user.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true')
+        $http.get('../api/current_user.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&prettyprint=true')
         .success(function(data) {
            thisCtrl.user = data;
         })
@@ -52,7 +52,7 @@
             var thisUser = user;
             
             // Issue the post
-            $http.post('../api/categories.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&prettyprint=true', thisCtrl.category)
+            $http.post('../api/categories.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&prettyprint=true', thisCtrl.category)
             .success(function(data) {
                thisUser.Categories = data.Categories;
             })
@@ -72,10 +72,8 @@
             var thisCtrl = this;
             var thisCategory = category;
             
-            alert('About to send ' + JSON.stringify(thisCtrl.keyIndicator));
-            
             // Issue the post
-            $http.post('../api/key_indicators.php?apiKey=94e21cbe-92f2-11e4-86fb-02d737fe62fd&categoryID=' + thisCategory.CategoryID + '&prettyprint=true', thisCtrl.keyIndicator)
+            $http.post('../api/key_indicators.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&categoryID=' + thisCategory.CategoryID + '&prettyprint=true', thisCtrl.keyIndicator)
             .success(function(data) {
                thisCategory.KeyIndicators = data.KeyIndicators;
             })

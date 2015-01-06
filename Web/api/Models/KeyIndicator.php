@@ -6,6 +6,7 @@ class KeyIndicator
     public $CategoryID;
     public $KeyIndicatorName;
     public $KeyIndicatorDescription;
+    public $PointsPossible;
     public $KeyIndicatorWeight;
     public $CreatedOn;
     public $IsActive;
@@ -14,10 +15,10 @@ class KeyIndicator
     
     public static function createFromDbObject($dbKeyIndicator)
     {
-        return static::create($dbKeyIndicator->KeyIndicatorID, $dbKeyIndicator->CategoryID, $dbKeyIndicator->KeyIndicatorName, $dbKeyIndicator->KeyIndicatorDescription, $dbKeyIndicator->KeyIndicatorWeight, $dbKeyIndicator->CreatedOn, $dbKeyIndicator->IsActive);
+        return static::create($dbKeyIndicator->KeyIndicatorID, $dbKeyIndicator->CategoryID, $dbKeyIndicator->KeyIndicatorName, $dbKeyIndicator->KeyIndicatorDescription, $dbKeyIndicator->PointsPossible, $dbKeyIndicator->KeyIndicatorWeight, $dbKeyIndicator->CreatedOn, $dbKeyIndicator->IsActive);
     }
     
-    public static function create($keyIndicatorID, $categoryID, $keyIndicatorName, $keyIndicatorDescription, $keyIndicatorWeight, $createdOn, $isActive)
+    public static function create($keyIndicatorID, $categoryID, $keyIndicatorName, $keyIndicatorDescription, $pointsPossible, $keyIndicatorWeight, $createdOn, $isActive)
     {
         $keyIndicator = new KeyIndicator();
         
@@ -25,6 +26,7 @@ class KeyIndicator
         $keyIndicator->CategoryID = $categoryID;
         $keyIndicator->KeyIndicatorName = $keyIndicatorName;
         $keyIndicator->KeyIndicatorDescription = $keyIndicatorDescription;
+        $keyIndicator->PointsPossible = $pointsPossible;
         $keyIndicator->KeyIndicatorWeight = $keyIndicatorWeight;
         $keyIndicator->CreatedOn = $createdOn;
         $keyIndicator->IsActive = $isActive;

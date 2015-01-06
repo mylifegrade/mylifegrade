@@ -34,6 +34,7 @@ CREATE TABLE KeyIndicator (
     CategoryID INT NOT NULL,  -- TODO: Make this an FK
     KeyIndicatorName VARCHAR(200),
     KeyIndicatorDescription VARCHAR(2000),
+    PointsPossible INT NOT NULL,
     KeyIndicatorWeight INT NOT NULL,
     CreatedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     IsActive BOOL NOT NULL DEFAULT 1
@@ -52,4 +53,4 @@ CREATE TABLE DailyKeyIndicatorReport (
 INSERT INTO User 
 (UserName, PasswordHash, Email, CreatedOn, LastActivityDate, UserType, ApiKey)
 VALUES 
-('admin', '', 'mylifegrade@gmail.com', NOW(), NOW(), 1, UUID());
+('admin', '', 'mylifegrade@gmail.com', NOW(), NOW(), 1, '53288076-3666-48e6-a978-27a6c5962ad3');
