@@ -140,8 +140,6 @@
                 
                 <hr />
                 
-                Categories: {{ userCtrl.user.Categories.length }}
-                
                 <div ng-repeat="category in userCtrl.user.Categories" class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">
@@ -153,6 +151,19 @@
                     <label>DESCRIPTION</label>
                     <p class="categoryDescription">
                       {{ category.CategoryDescription }}</p>
+                    
+                    <!-- Key indicators -->
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr ng-repeat="keyIndicator in category.KeyIndicators">
+                          <td>
+                            {{keyIndicator.KeyIndicatorName}}
+                            <span class="badge pull-right">{{keyIndicator.KeyIndicatorWeight}}</span>
+                          </td>
+                          <td>{{keyIndicator.KeyIndicatorDescription}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                     
                     <!-- Add key indicator panel -->
                     <div class="panel-group" id="accordionAddKeyIndicator" role="tablist" aria-multiselectable="true">
@@ -193,20 +204,6 @@
                         </div>
                       </div>
                     </div>
-                    
-                    <!-- Key indicators -->
-                    <table class="table table-bordered" ng-show="category.KeyIndicators.length > 0">
-                      <thead>
-                        <tr>
-                          <th>Hi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>There</td>
-                        </tr>
-                      </tbody>
-                    </table>
                   </div>
                 </div>
               </div>
