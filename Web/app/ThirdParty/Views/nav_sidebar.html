@@ -1,0 +1,11 @@
+<!-- Sidebar -->
+<div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+        <li ng-class="{ active: homeCtrl.isActiveTab('tabOverview')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabOverview')">Overview</a></li>
+        <li ng-class="{ active: homeCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabGoals')">Goals</a></li>
+        <li ng-class="{ active: homeCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabSettings')">Settings</a></li>
+    </ul>
+    <ul ng-show="userCtrl.user.UserType == 1" class="nav nav-sidebar">
+        <li ng-show="userCtrl.user.UserType == 1" ng-class="{ active: homeCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabJson')">JSON</a></li>
+    </ul>
+</div>

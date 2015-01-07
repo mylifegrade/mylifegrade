@@ -1,6 +1,13 @@
 (function() {
     var app = angular.module('myLifeGrade', []); 
     
+    app.directive('nav_sidebar', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'Views/nav_sidebar.html'
+        };
+    });
+    
     app.controller('HomeController', function() {
         // Init
         this.activeTabName = 'tabGoals';
