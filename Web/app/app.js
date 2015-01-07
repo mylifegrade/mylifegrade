@@ -1,12 +1,12 @@
 (function() {
     var app = angular.module('myLifeGrade', []); 
     
-    app.directive('nav_sidebar', function() {
+    /* app.directive('nav_sidebar', function() {
         return {
             restrict: 'E',
             templateUrl: 'Partials/nav_sidebar.html'
         };
-    });
+    }); */
     
     app.controller('HomeController', function() {
         // Init
