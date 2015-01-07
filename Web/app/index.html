@@ -40,94 +40,166 @@
     <!-- Nav -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#">myLifeGrade</a>
-            </div>
-            <div class="navbar-text navbar-right">
-              {{ userCtrl.user.UserName }}
-            </div>
-          </div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">myLifeGrade</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <span class="navbar-text navbar-right" style="margin-right: 1em;">
+            {{ userCtrl.user.UserName }}
+          </ul>
         </div>
       </div>
     </nav>
 
     <!-- Body -->
-    <div class="container-fluid" style="margin-top: 80px;">
+    <div class="container-fluid" style="margin-top: 60px;">
+      <!-- Alert message -->
+      <div ng-show="homeCtrl.error != null" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Error:</strong> {{ userCtrl.error }}
+      </div>
+      
       <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          
-          <!-- Alert message -->
-          <div ng-show="homeCtrl.error != null" class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error:</strong> {{ userCtrl.error }}
-          </div>
-          
-          <div class="row">
+        
+        <!-- Nav -->
+        <div class="col-sm-2">
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-class="{ active: homeCtrl.isActiveTab('tabOverview')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabOverview')">Overview</a></li>
+            <li ng-class="{ active: homeCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabGoals')">Goals</a></li>
+            <li ng-class="{ active: homeCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabSettings')">Settings</a></li>
             
-            <!-- Nav -->
-            <div class="col-md-2">
-              <ul class="nav nav-pills nav-stacked">
-                <li ng-class="{ active: homeCtrl.isActiveTab('tabOverview')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabOverview')">Overview</a></li>
-                <li ng-class="{ active: homeCtrl.isActiveTab('tabGoals')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabGoals')">Goals</a></li>
-                <li ng-class="{ active: homeCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabSettings')">Settings</a></li>
-                
-                <hr ng-show="userCtrl.user.UserType == 1"></hr>
-                <li ng-show="userCtrl.user.UserType == 1" ng-class="{ active: homeCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabJson')">JSON</a></li>
-              </ul>
+            <hr ng-show="userCtrl.user.UserType == 1"></hr>
+            <li ng-show="userCtrl.user.UserType == 1" ng-class="{ active: homeCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="homeCtrl.setActiveTab('tabJson')">JSON</a></li>
+          </ul>
+        </div>
+        
+        <!-- Main content -->
+        <div class="col-sm-10">
+          
+          <!-- Overview section -->
+          <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabOverview')">
+            <h3 class="sectionTitle">Overview</h3>
+            <div  class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Overview</h3>
+              </div>
+              <div class="panel-body">
+                This is the overview panel
+              </div>
             </div>
+          </div>
+
+          <!-- Goals section -->
+          <div id="sectionGoals" ng-show="homeCtrl.isActiveTab('tabGoals')">
+            <h3 class="sectionTitle">Goals</h3>
             
-            <!-- Main content -->
-            <div class="col-md-10">
-              
-              <!-- Overview section -->
-              <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabOverview')">
-                <h3 class="sectionTitle">Overview</h3>
-                <div  class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Overview</h3>
-                  </div>
+            <!-- Add category panel -->
+            <div class="panel-group" id="accordionAddCategory" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingAddCategory">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordionAddCategory" href="#collapseAddCategory" aria-expanded="true" aria-controls="collapseAddCategory">
+                      Add a category <i class="glyphicon glyphicon-plus pull-right"></i>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseAddCategory" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddCategory">
                   <div class="panel-body">
-                    This is the overview panel
+                    <form name="addCategoryForm" ng-controller="CategoryController as categoryCtrl" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
+                      <div class="form-group">
+                        <label for="categoryName">Name</label>
+                        <input id="categoryName" type="text" ng-model="categoryCtrl.category.CategoryName" class="form-control" placeholder="Category Name"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="categoryDescription">Description</label>
+                        <textarea id="categoryDescription" ng-model="categoryCtrl.category.CategoryDescription" class="form-control" rows="3" placeholder="Category Description"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="categoryWeight">Weight</label>
+                        <select id="categoryWeight" ng-model="categoryCtrl.category.CategoryWeight" class="form-control">
+                          <option value="1">1 - Very low</option>
+                          <option value="2">2 - Low</option>
+                          <option value="3">3 - Medium</option>
+                          <option value="4">4 - High</option>
+                          <option value="5">5 - Very high</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary pull-right">Add</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-
-              <!-- Goals section -->
-              <div id="sectionGoals" ng-show="homeCtrl.isActiveTab('tabGoals')">
-                <h3 class="sectionTitle">Goals</h3>
+            </div>
+            
+            <hr />
+            
+            <div ng-repeat="category in userCtrl.user.Categories" class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  {{ category.CategoryName }}
+                  <span class="badge pull-right">{{ category.CategoryWeight }}</span>
+                </h3>
+              </div>
+              <div class="panel-body">
+                <label>DESCRIPTION</label>
+                <p class="categoryDescription">
+                  {{ category.CategoryDescription }}</p>
                 
-                <!-- Add category panel -->
-                <div class="panel-group" id="accordionAddCategory" role="tablist" aria-multiselectable="true">
+                <!-- Key indicators -->
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr ng-repeat="keyIndicator in category.KeyIndicators">
+                      <td style="width: 30%; min-width: 30%;">
+                        {{keyIndicator.KeyIndicatorName}}
+                        <span class="badge pull-right">{{keyIndicator.KeyIndicatorWeight}}</span>
+                      </td>
+                      <td>{{keyIndicator.KeyIndicatorDescription}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                <!-- Add key indicator panel -->
+                <div class="panel-group" id="accordionAddKeyIndicator" role="tablist" aria-multiselectable="true">
                   <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingAddCategory">
+                    <div class="panel-heading" role="tab" id="headingAddKeyIndicator">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordionAddCategory" href="#collapseAddCategory" aria-expanded="true" aria-controls="collapseAddCategory">
-                          Add a category <i class="glyphicon glyphicon-plus pull-right"></i>
+                        <a data-toggle="collapse" data-parent="#accordionAddKeyIndicator" href="#collapseAddKeyIndicator" aria-expanded="true" aria-controls="collapseAddKeyIndicator">
+                          Add a key indicator <i class="glyphicon glyphicon-plus pull-right"></i>
                         </a>
                       </h4>
                     </div>
-                    <div id="collapseAddCategory" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddCategory">
+                    <div id="collapseAddKeyIndicator" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddKeyIndicator">
                       <div class="panel-body">
-                        <form name="addCategoryForm" ng-controller="CategoryController as categoryCtrl" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
+                        <form name="addKeyIndicatorForm" ng-controller="KeyIndicatorController as keyIndicatorCtrl" ng-submit="keyIndicatorCtrl.addKeyIndicator(category)">
                           <div class="form-group">
-                            <label for="categoryName">Name</label>
-                            <input id="categoryName" type="text" ng-model="categoryCtrl.category.CategoryName" class="form-control" placeholder="Category Name"/>
+                            <label for="keyIndicatorName">Name</label>
+                            <input id="keyIndicatorName" type="text" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorName" class="form-control" placeholder="Key Indicator Name"/>
                           </div>
                           <div class="form-group">
-                            <label for="categoryDescription">Description</label>
-                            <textarea id="categoryDescription" ng-model="categoryCtrl.category.CategoryDescription" class="form-control" rows="3" placeholder="Category Description"></textarea>
+                            <label for="keyIndicatorDescription">Description</label>
+                            <textarea id="keyIndicatorDescription" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorDescription" class="form-control" rows="3" placeholder="Key Indicator Description"></textarea>
                           </div>
                           <div class="form-group">
-                            <label for="categoryWeight">Weight</label>
-                            <select id="categoryWeight" ng-model="categoryCtrl.category.CategoryWeight" class="form-control">
+                            <label for="keyIndicatorWeight">Weight</label>
+                            <select id="keyIndicatorWeight" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorWeight" class="form-control">
                               <option value="1">1 - Very low</option>
                               <option value="2">2 - Low</option>
                               <option value="3">3 - Medium</option>
                               <option value="4">4 - High</option>
                               <option value="5">5 - Very high</option>
                             </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="keyIndicatorPossiblePoints">Name</label>
+                            <input id="keyIndicatorPossiblePoints" type="text" ng-model="keyIndicatorCtrl.keyIndicator.PointsPossible" class="form-control" placeholder="Possible Points"/>
                           </div>
                           <div class="form-group">
                             <button type="submit" class="btn btn-primary pull-right">Add</button>
@@ -137,105 +209,32 @@
                     </div>
                   </div>
                 </div>
-                
-                <hr />
-                
-                <div ng-repeat="category in userCtrl.user.Categories" class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">
-                      {{ category.CategoryName }}
-                      <span class="badge pull-right">{{ category.CategoryWeight }}</span>
-                    </h3>
-                  </div>
-                  <div class="panel-body">
-                    <label>DESCRIPTION</label>
-                    <p class="categoryDescription">
-                      {{ category.CategoryDescription }}</p>
-                    
-                    <!-- Key indicators -->
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr ng-repeat="keyIndicator in category.KeyIndicators">
-                          <td style="width: 30%; min-width: 30%;">
-                            {{keyIndicator.KeyIndicatorName}}
-                            <span class="badge pull-right">{{keyIndicator.KeyIndicatorWeight}}</span>
-                          </td>
-                          <td>{{keyIndicator.KeyIndicatorDescription}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    
-                    <!-- Add key indicator panel -->
-                    <div class="panel-group" id="accordionAddKeyIndicator" role="tablist" aria-multiselectable="true">
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingAddKeyIndicator">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordionAddKeyIndicator" href="#collapseAddKeyIndicator" aria-expanded="true" aria-controls="collapseAddKeyIndicator">
-                              Add a key indicator <i class="glyphicon glyphicon-plus pull-right"></i>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseAddKeyIndicator" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddKeyIndicator">
-                          <div class="panel-body">
-                            <form name="addKeyIndicatorForm" ng-controller="KeyIndicatorController as keyIndicatorCtrl" ng-submit="keyIndicatorCtrl.addKeyIndicator(category)">
-                              <div class="form-group">
-                                <label for="keyIndicatorName">Name</label>
-                                <input id="keyIndicatorName" type="text" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorName" class="form-control" placeholder="Key Indicator Name"/>
-                              </div>
-                              <div class="form-group">
-                                <label for="keyIndicatorDescription">Description</label>
-                                <textarea id="keyIndicatorDescription" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorDescription" class="form-control" rows="3" placeholder="Key Indicator Description"></textarea>
-                              </div>
-                              <div class="form-group">
-                                <label for="keyIndicatorWeight">Weight</label>
-                                <select id="keyIndicatorWeight" ng-model="keyIndicatorCtrl.keyIndicator.KeyIndicatorWeight" class="form-control">
-                                  <option value="1">1 - Very low</option>
-                                  <option value="2">2 - Low</option>
-                                  <option value="3">3 - Medium</option>
-                                  <option value="4">4 - High</option>
-                                  <option value="5">5 - Very high</option>
-                                </select>
-                              </div>
-                              <div class="form-group">
-                                <label for="keyIndicatorPossiblePoints">Name</label>
-                                <input id="keyIndicatorPossiblePoints" type="text" ng-model="keyIndicatorCtrl.keyIndicator.PointsPossible" class="form-control" placeholder="Possible Points"/>
-                              </div>
-                              <div class="form-group">
-                                <button type="submit" class="btn btn-primary pull-right">Add</button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
-              
-              <!-- Settings section -->
-              <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabSettings')">
-                <h3 class="sectionTitle">Settings</h3>
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Settings</h3>
-                  </div>
-                  <div class="panel-body">
-                    This is the settings panel
-                  </div>
-                </div>
+            </div>
+          </div>
+          
+          <!-- Settings section -->
+          <div id="sectionOverview" ng-show="homeCtrl.isActiveTab('tabSettings')">
+            <h3 class="sectionTitle">Settings</h3>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Settings</h3>
               </div>
-              
-              <!-- JSON section -->
-              <div id="sectionJson" ng-show="homeCtrl.isActiveTab('tabJson')">
-                <h3 class="sectionTitle">JSON</h3>
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">JSON</h3>
-                  </div>
-                  <div class="panel-body">
-                    <pre>{{ homeCtrl.serialize(userCtrl.user, true, false) }}</pre>
-                  </div>
-                </div>
+              <div class="panel-body">
+                This is the settings panel
+              </div>
+            </div>
+          </div>
+          
+          <!-- JSON section -->
+          <div id="sectionJson" ng-show="homeCtrl.isActiveTab('tabJson')">
+            <h3 class="sectionTitle">JSON</h3>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">JSON</h3>
+              </div>
+              <div class="panel-body">
+                <pre>{{ homeCtrl.serialize(userCtrl.user, true, false) }}</pre>
               </div>
             </div>
           </div>
