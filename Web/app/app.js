@@ -9,17 +9,6 @@
     });
     
     app.controller('HomeController', function() {
-        // Init
-        this.activeTabName = 'tabGoals';
-        
-        // Tabs
-        this.setActiveTab = function(tabName) {
-            this.activeTabName = tabName;
-        };
-        this.isActiveTab = function(tabName) {
-            return this.activeTabName === tabName;
-        };
-        
         // Serialization
         this.serialize = function(obj, prettyPrint, splitIntoLines) {
             if (prettyPrint) {
@@ -30,6 +19,21 @@
                 return json;
             }
             return JSON.stringify(obj);
+        };
+    });
+    
+    app.controller('NavController', function() {
+        // Init
+        this.activeTabName = 'tabGoals';
+        this.activeTitle = 'Goals';
+        
+        // Tabs
+        this.setActiveTab = function(tabName, title) {
+            this.activeTabName = tabName;
+            this.activeTitle = title;
+        };
+        this.isActiveTab = function(tabName) {
+            return this.activeTabName === tabName;
         };
     });
     

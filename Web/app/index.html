@@ -34,7 +34,7 @@
     <link href="app.css" rel="stylesheet">
   </head>
 
-  <body ng-controller="UserController as userCtrl">
+  <body ng-controller="UserController as userCtrl" ng-controller="HomeController as homeCtrl">
 
     <!-- Top navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -62,7 +62,7 @@
     </nav>
 
     <!-- Page -->
-    <div class="container-fluid" ng-controller="HomeController as homeCtrl">
+    <div class="container-fluid" ng-controller="NavController as navCtrl">
       <div class="row">
         
         <!-- Sidebar -->
@@ -72,7 +72,7 @@
         
         <!-- Main content -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">{{ navCtrl.activeTitle }}</h1>
         </div>
       </div>
     </div>
