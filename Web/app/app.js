@@ -1,20 +1,6 @@
 (function() {
     var app = angular.module('myLifeGrade', []); 
     
-    app.directive('sidebarLinks', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'Partials/sidebar_links.html'
-        };
-    });
-    
-    app.directive('topNavbar', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'Partials/top_navbar.html'
-        };
-    });
-    
     app.controller('HomeController', function() {
         // Serialization
         this.serialize = function(obj, prettyPrint, splitIntoLines) {
@@ -100,5 +86,19 @@
             });
         };
     }]);
+    
+    app.directive('topNavbar', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'Partials/top_navbar.html',
+        };
+    });
+    
+    app.directive('sidebarLinks', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'Partials/sidebar_links.html'
+        };
+    });
         
 })();
