@@ -8,6 +8,13 @@
         };
     });
     
+    app.directive('topNavbar', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'Partials/top_navbar.html'
+        };
+    });
+    
     app.controller('HomeController', function() {
         // Serialization
         this.serialize = function(obj, prettyPrint, splitIntoLines) {
