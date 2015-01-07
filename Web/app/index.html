@@ -36,7 +36,7 @@
     <link href="app.css" rel="stylesheet">
   </head>
 
-  <body ng-controller="UserController as userCtrl" ng-controller="HomeController as homeCtrl">
+  <body ng-controller="UserController as userCtrl">
     <top-navbar></top-navbar>
 
     <!-- Page -->
@@ -52,7 +52,26 @@
         <div class="col-sm-10 col-sm-offset-2 col-md-11 col-md-offset-1 main">
           <h1 class="page-header">{{ navCtrl.activeTitle }}</h1>
           
+          <!-- Overview section -->
+          <div ng-show="navCtrl.isActiveTab('tabOverview')">
+            This is the overview section
+          </div>
           
+          <!-- Goals section -->
+          <div ng-show="navCtrl.isActiveTab('tabGoals')">
+            This is the goals section
+            <add-category></add-category>
+          </div>
+          
+          <!-- Settings section -->
+          <div ng-show="navCtrl.isActiveTab('tabSettings')">
+            This is the settings section
+          </div>
+          
+          <!-- JSON section -->
+          <div ng-controller="HomeController as homeCtrl" ng-show="navCtrl.isActiveTab('tabJson')">
+            <pre>{{ homeCtrl.serialize(userCtrl.user, true, false) }}</pre>
+          </div>
         </div>
       </div>
     </div>

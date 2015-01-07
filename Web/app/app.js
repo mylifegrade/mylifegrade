@@ -2,7 +2,6 @@
     var app = angular.module('myLifeGrade', [ 'goals' ]); 
     
     app.controller('HomeController', function() {
-        // Serialization
         this.serialize = function(obj, prettyPrint, splitIntoLines) {
             if (prettyPrint) {
                 var json = JSON.stringify(obj, undefined, 4);
