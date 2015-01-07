@@ -4,7 +4,7 @@
     app.directive('nav_sidebar', function() {
         return {
             restrict: 'E',
-            templateUrl: 'Views/nav_sidebar.html'
+            templateUrl: 'Partials/nav_sidebar.html'
         };
     });
     
