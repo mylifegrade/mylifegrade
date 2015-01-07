@@ -3,6 +3,14 @@ body {
   padding-top: 60px;
 }
 
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
 .sectionTitle
 {
     margin-top: 0;
