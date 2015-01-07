@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('myLifeGrade', [ 'category' ]); 
+    var app = angular.module('myLifeGrade', [ 'goals' ]); 
     
     app.controller('HomeController', function() {
         // Serialization
