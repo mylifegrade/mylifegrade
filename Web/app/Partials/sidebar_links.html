@@ -4,5 +4,5 @@
     <li ng-class="{ active: navCtrl.isActiveTab('tabSettings')}" role="presentation"><a href ng-click="navCtrl.setActiveTab('tabSettings', 'Settings')">Settings</a></li>
 </ul>
 <ul ng-show="userCtrl.user.UserType == 1" class="nav nav-sidebar">
-    <li ng-show="userCtrl.user.UserType == 1" ng-class="{ active: navCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="navCtrl.setActiveTab('tabJson', 'Overview')">JSON</a></li>
+    <li ng-show="userCtrl.user.UserType == 1" ng-class="{ active: navCtrl.isActiveTab('tabJson')}" role="presentation"><a href ng-click="navCtrl.setActiveTab('tabJson', 'JSON')">JSON</a></li>
 </ul>
