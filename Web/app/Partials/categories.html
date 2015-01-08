@@ -1,7 +1,7 @@
 <div role="tabpanel" ng-controller="CategoryController as categoryCtrl">
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
-            <a ng-href="#category_{{category.CategoryID}}">{{ category.CategoryName }}</a>
+            <a href ng-click="categoryCtrl.setCurrentCategory(category)">{{ category.CategoryName }}</a>
         </li>
     </ul>
     
