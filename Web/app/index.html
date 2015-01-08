@@ -31,7 +31,9 @@
     
     <!-- Site scripts and files -->
     <script src="app.js" type="text/javascript"></script>
+    <script src="users.js" type="text/javascript"></script>
     <script src="goals.js" type="text/javascript"></script>
+    <script src="categories.js" type="text/javascript"></script>
     
     <link href="app.css" rel="stylesheet">
   </head>
@@ -59,8 +61,8 @@
           
           <!-- Goals section -->
           <div ng-show="navCtrl.isActiveTab('tabGoals')">
-            This is the goals section
             <add-category></add-category>
+            <categories></categories>
           </div>
           
           <!-- Settings section -->
