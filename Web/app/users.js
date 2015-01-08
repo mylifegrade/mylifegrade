@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module('users', [ 'categories' ]); 
     
-    app.controller('UserController', [ '$http', function($http) {
+    app.controller('CurrentUserController', [ '$http', function($http) {
         // Init
         this.user = { };
         
