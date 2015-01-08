@@ -3,7 +3,7 @@
 
     app.controller('CategoryController', ['$http', function($http) {
         // Init
-        this.category = { CategoryWeight: 3 };
+        this.categoryToAdd = { CategoryWeight: 3 };
         
         // Stuff
         this.addCategory = function(user) {
@@ -12,7 +12,7 @@
             var thisUser = user;
             
             // Issue the post
-            $http.post('../api/categories.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&prettyprint=true', thisCtrl.category)
+            $http.post('../api/categories.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&prettyprint=true', thisCtrl.categoryToAdd)
             .success(function(data) {
                thisUser.Categories = data.Categories;
             })
