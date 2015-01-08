@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('categories', [ ]);
+    var app = angular.module('categories', [ 'key_indicators' ]);
 
     app.controller('CategoryController', ['$http', function($http) {
         // Init

@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('goals', [ 'categories' ]);
+    var app = angular.module('key_indicators', [ ]);
     
     app.controller('KeyIndicatorController', ['$http', function($http) {
         // Init
@@ -22,5 +22,4 @@
         };
     }]);
     
-
 })();
