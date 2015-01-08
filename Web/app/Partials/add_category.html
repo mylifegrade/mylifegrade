@@ -13,15 +13,15 @@
         <form name="addCategoryForm" ng-controller="CategoryController as categoryCtrl" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
           <div class="form-group">
             <label for="categoryName">Name</label>
-            <input id="categoryName" type="text" ng-model="categoryCtrl.category.CategoryName" class="form-control" placeholder="Category Name"/>
+            <input id="categoryName" type="text" ng-model="categoryCtrl.categoryToAdd.CategoryName" class="form-control" placeholder="Category Name"/>
           </div>
           <div class="form-group">
             <label for="categoryDescription">Description</label>
-            <textarea id="categoryDescription" ng-model="categoryCtrl.category.CategoryDescription" class="form-control" rows="3" placeholder="Category Description"></textarea>
+            <textarea id="categoryDescription" ng-model="categoryCtrl.categoryToAdd.CategoryDescription" class="form-control" rows="3" placeholder="Category Description"></textarea>
           </div>
           <div class="form-group">
             <label for="categoryWeight">Weight</label>
-            <select id="categoryWeight" ng-model="categoryCtrl.category.CategoryWeight" class="form-control">
+            <select id="categoryWeight" ng-model="categoryCtrl.categoryToAdd.CategoryWeight" class="form-control">
               <option value="1">1 - Very low</option>
               <option value="2">2 - Low</option>
               <option value="3">3 - Medium</option>
