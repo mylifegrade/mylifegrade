@@ -3,7 +3,22 @@
 
     app.controller('CategoryController', ['$http', function($http) {
         // Init
+        this.selectedCategory = { CategoryID: -1 };
         this.categoryToAdd = { CategoryWeight: 3 };
+        
+        this.isSelectedOrDefault = function(category) {
+            if (this.selectedCategory.CategoryID == -1)
+            {
+                this.selectedCategory = category;
+            }
+            return this.isSelectedCategory(category.CategoryID);
+        };
+        this.isSelectedCategory = function(categoryID) {
+            return this.selectedCategory.CategoryID == categoryID;
+        };
+        this.setCurrentCategory = function(category) {
+            this.selectedCategory = category;
+        };
         
         // Stuff
         this.addCategory = function(user) {

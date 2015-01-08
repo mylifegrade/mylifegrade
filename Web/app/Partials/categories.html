@@ -1,12 +1,12 @@
-<div role="tabpanel">
+<div role="tabpanel" ng-controller="CategoryController as categoryCtrl">
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" ng-repeat="category in userCtrl.user.Categories">
-            <a ng-href="#category_{{category.CategoryID}}">{{ category.CategoryName }} </a>
+        <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
+            <a ng-href="#category_{{category.CategoryID}}">{{ category.CategoryName }}</a>
         </li>
     </ul>
     
     <div class="tab-content">
-        <div ng-repeat="category in userCtrl.user.Categories" role="tabpanel" class="tab-pane active" id="category_{{category.CategoryID}}">
+        <div ng-repeat="category in userCtrl.user.Categories" role="tabpanel" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }" class="tab-pane" id="category_{{category.CategoryID}}">
             This is the {{category.CategoryName}} category
         </div>
     </div>
