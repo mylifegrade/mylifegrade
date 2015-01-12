@@ -14,27 +14,32 @@
             return $(this).parent().find('.content').html();
         },
         placement: function() { 
-            return 'left';
+            return 'bottom';
         }
     });
 </script>
 
 <div role="tabpanel" ng-controller="CategoryController as categoryCtrl">
     
-    <!-- Add category button and form-->
-    <div class="popover-markup pull-right">
-        <a class="trigger btn btn-default" href="#" role="button"><i class="glyphicon glyphicon-plus" data-placement="left"></i></a> 
-        <div class="head hide">Add new category</div>
-        <div class="content hide">
-            <add-category></add-category>
+    <div class="row">
+        <div class="col-sm-11">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
+                    <a href ng-click="categoryCtrl.setCurrentCategory(category)">{{ category.CategoryName }}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-1">
+            <!-- Add category button and form-->
+            <div class="popover-markup">
+                <a class="trigger btn btn-default" href="#" role="button"><i class="glyphicon glyphicon-plus" data-placement="left"></i></a> 
+                <div class="head hide">Add new category</div>
+                <div class="content hide">
+                    <add-category></add-category>
+                </div>
+            </div>
         </div>
     </div>
-    
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
-            <a href ng-click="categoryCtrl.setCurrentCategory(category)">{{ category.CategoryName }}</a>
-        </li>
-    </ul>
     
     <div class="tab-content">
         <div ng-repeat="category in userCtrl.user.Categories" role="tabpanel" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }" class="tab-pane">
