@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('users', [ 'categories' ]); 
+    var app = angular.module('users', [ 'goals' ]); 
     
     app.controller('CurrentUserController', [ '$http', function($http) {
         // Init
