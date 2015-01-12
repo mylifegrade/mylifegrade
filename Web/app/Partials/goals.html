@@ -1,5 +1,34 @@
+<script type="text/javascript">
+    // Enable popovers
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    
+    // Enable HTML popover
+    $('.popover-markup>.trigger').popover({
+        html: true,
+        title: function () {
+            return $(this).parent().find('.head').html();
+        },
+        content: function () {
+            return $(this).parent().find('.content').html();
+        },
+        placement: function() { 
+            return 'left';
+        }
+    });
+</script>
+
 <div role="tabpanel" ng-controller="CategoryController as categoryCtrl">
-    <add-category></add-category>
+    
+    <!-- Add category button and form-->
+    <div class="popover-markup pull-right">
+        <a class="trigger btn btn-default" href="#" role="button"><i class="glyphicon glyphicon-plus" data-placement="left"></i></a> 
+        <div class="head hide">Add new category</div>
+        <div class="content hide">
+            <add-category></add-category>
+        </div>
+    </div>
     
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
@@ -12,8 +41,6 @@
             <p class="categoryDescription"><label>DESCRIPTION</label><br />{{category.CategoryDescription}}</p>
             <hr />
             
-            <add-key-indicator></add-key-indicator>
-            
             <!-- Current key indicators -->
             <div ng-repeat="keyIndicator in category.KeyIndicators" class="panel panel-default">
                 <div class="panel-heading">
@@ -22,6 +49,18 @@
                 <div class="panel-body">
                     {{keyIndicator.KeyIndicatorDescription}}
                 </div>
+            </div>
+            
+            <hr />
+            
+            <!-- Add key indicator -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Add a key indicator</h3>
+              </div>
+              <div class="panel-body">
+                <add-key-indicator></add-key-indicator>
+              </div>
             </div>
         </div>
     </div>
