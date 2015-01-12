@@ -12,6 +12,9 @@
             <p class="categoryDescription"><label>DESCRIPTION</label><br />{{category.CategoryDescription}}</p>
             <hr />
             
+            <add-key-indicator></add-key-indicator>
+            
+            <!-- Current key indicators -->
             <div ng-repeat="keyIndicator in category.KeyIndicators" class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{keyIndicator.KeyIndicatorName}}</h3>
