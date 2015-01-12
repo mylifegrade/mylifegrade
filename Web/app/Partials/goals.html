@@ -1,0 +1,19 @@
+<div role="tabpanel" ng-controller="CategoryController as categoryCtrl">
+    <add-category></add-category>
+    
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
+            <a href ng-click="categoryCtrl.setCurrentCategory(category)">{{ category.CategoryName }}</a>
+        </li>
+    </ul>
+    
+    <div class="tab-content">
+        <div ng-repeat="category in userCtrl.user.Categories" role="tabpanel" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }" class="tab-pane">
+            <p class="categoryDescription"><label>DESCRIPTION</label><br />{{category.CategoryDescription}}</p>
+            <hr />
+            <div ng-repeat="keyIndicator in category.KeyIndicators">
+                This is a KI
+            </div>
+        </div>
+    </div>
+</div>

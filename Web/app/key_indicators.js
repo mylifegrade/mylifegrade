@@ -22,4 +22,11 @@
         };
     }]);
     
+    app.directive('keyIndicators', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'Partials/key_indicators.html'
+        }
+    });
+    
 })();
