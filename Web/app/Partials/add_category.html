@@ -1,39 +1,23 @@
-<!-- Add category panel -->
-<div class="panel-group" id="accordionAddCategory" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingAddCategory">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordionAddCategory" href="#collapseAddCategory" aria-expanded="true" aria-controls="collapseAddCategory">
-          Add a category <i class="glyphicon glyphicon-plus pull-right"></i>
-        </a>
-      </h4>
-    </div>
-    <div id="collapseAddCategory" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddCategory">
-      <div class="panel-body">
-        <form name="addCategoryForm" ng-controller="CategoryController as categoryCtrl" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
-          <div class="form-group">
-            <label for="categoryName">Name</label>
-            <input id="categoryName" type="text" ng-model="categoryCtrl.categoryToAdd.CategoryName" class="form-control" placeholder="Category Name"/>
-          </div>
-          <div class="form-group">
-            <label for="categoryDescription">Description</label>
-            <textarea id="categoryDescription" ng-model="categoryCtrl.categoryToAdd.CategoryDescription" class="form-control" rows="3" placeholder="Category Description"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="categoryWeight">Weight</label>
-            <select id="categoryWeight" ng-model="categoryCtrl.categoryToAdd.CategoryWeight" class="form-control">
-              <option value="1">1 - Very low</option>
-              <option value="2">2 - Low</option>
-              <option value="3">3 - Medium</option>
-              <option value="4">4 - High</option>
-              <option value="5">5 - Very high</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary pull-right">Add</button>
-          </div>
-        </form>
-      </div>
-    </div>
+<form name="addCategoryForm" ng-controller="CategoryController as categoryCtrl" ng-submit="categoryCtrl.addCategory(userCtrl.user)">
+  <div class="form-group">
+    <label for="categoryName">Name</label>
+    <input id="categoryName" type="text" ng-model="categoryCtrl.categoryToAdd.CategoryName" class="form-control" placeholder="Category Name"/>
   </div>
-</div>
+  <div class="form-group">
+    <label for="categoryDescription">Description</label>
+    <textarea id="categoryDescription" ng-model="categoryCtrl.categoryToAdd.CategoryDescription" class="form-control" rows="3" placeholder="Category Description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="categoryWeight">Weight</label>
+    <select id="categoryWeight" ng-model="categoryCtrl.categoryToAdd.CategoryWeight" class="form-control">
+      <option value="1">1 - Very low</option>
+      <option value="2">2 - Low</option>
+      <option value="3">3 - Medium</option>
+      <option value="4">4 - High</option>
+      <option value="5">5 - Very high</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary pull-right">Add</button>
+  </div>
+</form>
