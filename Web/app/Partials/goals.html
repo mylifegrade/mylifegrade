@@ -11,8 +11,14 @@
         <div ng-repeat="category in userCtrl.user.Categories" role="tabpanel" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }" class="tab-pane">
             <p class="categoryDescription"><label>DESCRIPTION</label><br />{{category.CategoryDescription}}</p>
             <hr />
-            <div ng-repeat="keyIndicator in category.KeyIndicators">
-                This is a KI
+            
+            <div ng-repeat="keyIndicator in category.KeyIndicators" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{keyIndicator.KeyIndicatorName}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{keyIndicator.KeyIndicatorDescription}}
+                </div>
             </div>
         </div>
     </div>
