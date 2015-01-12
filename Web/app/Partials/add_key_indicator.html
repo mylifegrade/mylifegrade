@@ -10,7 +10,7 @@
     </div>
     <div id="collapseAddKeyIndicator" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddKeyIndicator">
       <div class="panel-body">
-        <form name="addKeyIndicatorForm" ng-controller="KeyIndicatorController as keyIndicatorCtrl" ng-submit="keyIndicatorCtrl.addKeyIndicator(userCtrl.user)">
+        <form name="addKeyIndicatorForm" ng-controller="KeyIndicatorController as keyIndicatorCtrl" ng-submit="keyIndicatorCtrl.addKeyIndicator(category)">
           <div class="form-group">
             <label for="keyIndicatorName">Name</label>
             <input id="keyIndicatorName" type="text" ng-model="keyIndicatorCtrl.keyIndicatorToAdd.KeyIndicatorName" class="form-control" placeholder="Key Indicator Name"/>
