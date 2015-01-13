@@ -30,7 +30,6 @@
             var thisCtrl = this;
             
             // Issue the post
-            alert('Issuing post');
             $http.post('../api/categories.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&prettyprint=true', thisCtrl.categoryToAdd)
             .success(function(data) {
                location.reload();
@@ -41,12 +40,16 @@
         };
         
         // Functions
-        this.addKeyIndicator = function (categoryID) {
+        this.addKeyIndicator = function(categoryID) {
+            
+            // Assign the category
+            this.keyIndicatorToAdd.CategoryID = categoryID;
+            
             // Temporary callback variables
             var thisCtrl = this;
             
             // Issue the post
-            $http.post('../api/key_indicators.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&categoryID=' + thisCtrl.keyIndicatorToAdd.CategoryID + '&prettyprint=true', thisCtrl.keyIndicatorToAdd)
+            $http.post('../api/key_indicators.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&prettyprint=true', thisCtrl.keyIndicatorToAdd)
             .success(function(data) {
                location.reload();
             })

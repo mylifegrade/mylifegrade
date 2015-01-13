@@ -31,6 +31,7 @@
         </div>
     </div>
     
+    <!-- Catgeory tabs -->
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
             <a href ng-click="categoryCtrl.setCurrentCategory(category)">{{ category.CategoryName }}</a>
@@ -40,6 +41,7 @@
         </li>
     </ul>
     
+    <!-- Category content -->
     <div class="tab-content" style="margin-top: 20px;">
         <div ng-repeat="category in userCtrl.user.Categories" role="tabpanel" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }" class="tab-pane">
             <p class="categoryDescription"><label>DESCRIPTION</label><br />{{category.CategoryDescription}}</p>
@@ -55,8 +57,6 @@
                     <span class="pull-right"> / {{keyIndicator.PointsPossible}}</span>
                 </div>
             </div>
-            
-            <hr />
             
             <!-- Add key indicator -->
             <div class="panel panel-success">

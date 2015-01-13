@@ -12,26 +12,26 @@ class KeyIndicatorsApiWrapper extends ApiWrapper
     
     public function doPost($requestBody)
     {
-        $category = self::getSpecifiedCategory();
-        if (strlen($requestBody) == 0)
-        {
-            throw new ApiException(100, "No request body specified");
-        }
-        
         $keyIndicator = json_decode($requestBody);
         if ($keyIndicator == null)
         {
             throw new ApiException(123, "Bad JSON data");
         }
         
+        $category = self::getSpecifiedCategory($keyIndicator);
+        if (strlen($requestBody) == 0)
+        {
+            throw new ApiException(100, "No request body specified");
+        }
+        
         $this->db->addKeyIndicator($category, $keyIndicator);
         return $category;
     }
     
-    private function getSpecifiedCategory()
+    private function getSpecifiedCategory($keyIndicator)
     {
         // Get the category ID
-        $categoryID = self::getFormValue("categoryID");
+        $categoryID = $keyIndicator->CategoryID;
         if ($categoryID == null)
         {
             throw new ApiException(502, "A category ID must be specified");
