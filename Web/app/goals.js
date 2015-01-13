@@ -41,16 +41,24 @@
         };
         
         // Functions
-        this.addKeyIndicator = function (category) {
+        this.addKeyIndicator = function (categoryID, user) {
             // Temporary callback variables
             var thisCtrl = this;
-            var thisCategory = category;
-            // var thisUser = user;
+            var thisUser = user;
+            
+            // Category ID sanity check
+            if (thisUser.Categories[categoryID] == null)
+            {
+                alert('Not a valid category ID');
+                return;
+            }
+            
+            thisCtrl.keyIndicatorToAdd.CategoryID = categoryID;
             
             // Issue the post
-            $http.post('../api/key_indicators.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&categoryID=' + thisCategory.CategoryID + '&prettyprint=true', thisCtrl.keyIndicatorToAdd)
+            $http.post('../api/key_indicators.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&categoryID=' + thisCtrl.keyIndicatorToAdd.CategoryID + '&prettyprint=true', thisCtrl.keyIndicatorToAdd)
             .success(function(data) {
-               thisCategory.KeyIndicators = data.KeyIndicators;
+               thisUser.Categories[categoryID].KeyIndicators = data.KeyIndicators;
             })
             .error(function(data) {
                alert("ERROR:" + JSON.stringify(data));
