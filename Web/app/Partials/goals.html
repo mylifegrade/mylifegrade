@@ -21,29 +21,26 @@
 
 <div role="tabpanel" ng-controller="CategoryController as categoryCtrl">
     
-    <div class="row">
-        <div class="col-sm-11">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
-                    <a href ng-click="categoryCtrl.setCurrentCategory(category)">{{ category.CategoryName }}</a>
-                </li>
-            </ul>
+    <!-- Add category panel -->
+    <div id="addCategoryPanel" class="panel panel-success collapse">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add a category <i class="glyphicon glyphicon-plus pull-right"></i></h3>
         </div>
-        <div class="col-sm-1">
-            <!-- Add category button and form-->
-            <div class="popover-markup">
-                <a class="trigger btn btn-default" href="#" role="button"><i class="glyphicon glyphicon-plus" data-placement="left"></i></a> 
-                <div class="head hide">Add new category</div>
-                <div class="content hide">
-                    <div style="width: 15em; min-width: 15em;">
-                        <add-category></add-category>
-                    </div>
-                </div>
-            </div>
+        <div class="panel-body">
+            <add-category></add-category>
         </div>
     </div>
     
-    <div class="tab-content">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" ng-repeat="category in userCtrl.user.Categories" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }">
+            <a href ng-click="categoryCtrl.setCurrentCategory(category)">{{ category.CategoryName }}</a>
+        </li>
+        <li>
+            <a data-toggle="collapse" href="#addCategoryPanel" aria-expanded="false" aria-controls="addCategoryPanel"><i class="glyphicon glyphicon-plus"></i></a>
+        </li>
+    </ul>
+    
+    <div class="tab-content" style="margin-top: 20px;">
         <div ng-repeat="category in userCtrl.user.Categories" role="tabpanel" ng-class="{ active: categoryCtrl.isSelectedOrDefault(category) }" class="tab-pane">
             <p class="categoryDescription"><label>DESCRIPTION</label><br />{{category.CategoryDescription}}</p>
             <hr />

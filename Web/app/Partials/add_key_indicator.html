@@ -1,4 +1,5 @@
 <form name="addKeyIndicatorForm" ng-submit="categoryCtrl.addKeyIndicator(category.CategoryID, userCtrl.user)">
+  <input type="hidden" ng-model="categoryCtrl.keyIndicatorToAdd.CategoryID" value="category.CategoryID" />
   <div class="form-group">
     <label for="keyIndicatorName">Name</label>
     <input id="keyIndicatorName" type="text" ng-model="categoryCtrl.keyIndicatorToAdd.KeyIndicatorName" class="form-control" placeholder="Key Indicator Name"/>

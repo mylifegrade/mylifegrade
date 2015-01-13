@@ -152,14 +152,15 @@ class DbWrapper
         $keyIndicator->IsActive = true;
         
         // Prepare the statement
-        $queryText = "insert into KeyIndicator (CategoryID, KeyIndicatorName, KeyIndicatorDescription, KeyIndicatorWeight, IsActive)";
-        $queryText .= " values (:categoryID, :keyIndicatorName, :keyIndicatorDescription, :keyIndicatorWeight, :isActive);";
+        $queryText = "insert into KeyIndicator (CategoryID, KeyIndicatorName, KeyIndicatorDescription, KeyIndicatorWeight, PointsPossible, IsActive)";
+        $queryText .= " values (:categoryID, :keyIndicatorName, :keyIndicatorDescription, :keyIndicatorWeight, :pointsPossible, :isActive);";
         $parameters = array(
             ":categoryID" => $category->CategoryID,
             ":keyIndicatorName" => $keyIndicator->KeyIndicatorName,
             ":keyIndicatorDescription" => $keyIndicator->KeyIndicatorDescription,
             ":keyIndicatorWeight" => $keyIndicator->KeyIndicatorWeight,
-            ":isActive" => $keyIndicator->KeyIndicatorWeight
+            ":pointsPossible" => $keyIndicator->PointsPossible,
+            ":isActive" => $keyIndicator->IsActive
         );
         
         // Insert the key indicator and populate the ID

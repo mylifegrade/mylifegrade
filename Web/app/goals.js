@@ -7,7 +7,7 @@
     app.controller('CategoryController', ['$http', function($http) {
         // Init
         this.selectedCategory = { CategoryID: -1 };
-        this.categoryToAdd = { CategoryWeight: 3 };
+        this.categoryToAdd = { CategoryWeight: 3, };
         this.keyIndicatorToAdd = { KeyIndicatorWeight: 3, PointsPossible: 1 };
         
         this.isSelectedOrDefault = function(category) {
@@ -25,15 +25,15 @@
         };
         
         // Functions
-        this.addCategory = function(user) {
+        this.addCategory = function() {
             // Temporary callback variables
             var thisCtrl = this;
-            var thisUser = user;
             
             // Issue the post
+            alert('Issuing post');
             $http.post('../api/categories.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&prettyprint=true', thisCtrl.categoryToAdd)
             .success(function(data) {
-               thisUser.Categories = data.Categories;
+               location.reload();
             })
             .error(function(data) {
                alert("ERROR:" + JSON.stringify(data));
@@ -41,24 +41,14 @@
         };
         
         // Functions
-        this.addKeyIndicator = function (categoryID, user) {
+        this.addKeyIndicator = function (categoryID) {
             // Temporary callback variables
             var thisCtrl = this;
-            var thisUser = user;
-            
-            // Category ID sanity check
-            if (thisUser.Categories[categoryID] == null)
-            {
-                alert('Not a valid category ID');
-                return;
-            }
-            
-            thisCtrl.keyIndicatorToAdd.CategoryID = categoryID;
             
             // Issue the post
             $http.post('../api/key_indicators.php?apiKey=53288076-3666-48e6-a978-27a6c5962ad3&categoryID=' + thisCtrl.keyIndicatorToAdd.CategoryID + '&prettyprint=true', thisCtrl.keyIndicatorToAdd)
             .success(function(data) {
-               thisUser.Categories[categoryID].KeyIndicators = data.KeyIndicators;
+               location.reload();
             })
             .error(function(data) {
                alert("ERROR:" + JSON.stringify(data));
