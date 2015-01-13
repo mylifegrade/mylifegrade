@@ -8,7 +8,7 @@
         // Init
         this.selectedCategory = { CategoryID: -1 };
         this.categoryToAdd = { CategoryWeight: 3 };
-        this.keyIndicatorToAdd = { KeyIndicatorWeight: 3 };
+        this.keyIndicatorToAdd = { KeyIndicatorWeight: 3, PointsPossible: 1 };
         
         this.isSelectedOrDefault = function(category) {
             if (this.selectedCategory.CategoryID == -1)
